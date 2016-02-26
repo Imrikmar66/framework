@@ -6,6 +6,24 @@ abstract class Controller {
     protected $tpl_vars = array();
     protected $html;
     
+    function __construct() {
+        if($this->authenticationRequirement()){
+            if(Authentication::isAuthentified())
+                return true;
+            else
+                $this->errorLoadingController("Not authentified");
+        }
+    }
+    
+    /* ---- Protected ---- */
+    protected function getView($viewName){
+        return URI_TEMPLATE.'/'.$viewName.'.tpl';
+    }
+    
+    abstract protected function authenticationRequirement();
+    abstract protected function errorLoadingController();
+
+    /* ---- Public ---- */
     public function loadView($view){
         $smarty = new Smarty();
         $template = $this->getView($view);
@@ -21,10 +39,7 @@ abstract class Controller {
         echo $this->html;
     }
     
-    protected function getView($viewName){
-        return URI_TEMPLATE.'/'.$viewName.'.tpl';
-    }
-    
+    /* --- static ---- */
     public static function getController($name){
         $controller = ucfirst($name)."Controller";
         return new $controller();
