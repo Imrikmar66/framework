@@ -1,10 +1,18 @@
 <?php
 
 function Appli_autoload($className) { 
-    $curr_folders = scandir(URI_CLASS);
-    foreach($curr_folders as $folder){
+    $class_folders = scandir(URI_CLASS);
+    foreach($class_folders as $folder){
         if (file_exists(URI_CLASS.'/'.$folder.'/'.$className . '.php')) { 
             require_once URI_CLASS.'/'.$folder.'/'.$className . '.php'; 
+            return true; 
+        } 
+    }
+    
+    $controllers_folders = scandir(URI_CONTROLLERS);
+    foreach($controllers_folders as $folder){
+        if (file_exists(URI_CONTROLLERS.'/'.$folder.'/'.$className . '.php')) { 
+            require_once URI_CONTROLLERS.'/'.$folder.'/'.$className . '.php'; 
             return true; 
         } 
     }
@@ -20,6 +28,8 @@ function Appli_autoload($className) {
             return true;
         }
     }
+    
+    
     
     return false; 
 } 

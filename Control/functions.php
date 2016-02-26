@@ -21,9 +21,6 @@ function load_modules(){
         }
     }
 }
-function getView($viewName){
-    return URI_TEMPLATE.'/'.$viewName.'.tpl';
-}
 function sortArray($array){
         
         usort($array, "compare");
