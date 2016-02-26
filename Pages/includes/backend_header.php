@@ -6,6 +6,7 @@ if(MODE_DEV == TRUE){
     require_once URI_CONTROL.'/debug_functions.php';
 }
 require_once URI_CONTROL.'/functions.php';
+require_once URI_CONTROL.'/smarty-master/libs/Smarty.class.php';
 require_once URI_CLASS.'/Autoloader.php';
 session_start();
 
