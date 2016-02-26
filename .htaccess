@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^((?!Pages/).*)$ http://localhost:8888/PlanetCatalunya/Pages/$1 [L,NC]
+ErrorDocument 404 http://localhost:8888/PlanetCatalunya/index.php

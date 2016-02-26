@@ -1,0 +1,1942 @@
+/* Font */
+@font-face {
+    font-family: 'museo_sans100';
+    src: url('fonts/MuseoSans/museosans-100-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-100-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-100-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-100-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-100-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-100-webfont.svg#museo_sans100') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans100_italic';
+    src: url('fonts/MuseoSans/museosans-100italic-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-100italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-100italic-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-100italic-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-100italic-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-100italic-webfont.svg#museo_sans100_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans300';
+    src: url('fonts/MuseoSans/museosans-300-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-300-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-300-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-300-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-300-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-300-webfont.svg#museo_sans300') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans300_italic';
+    src: url('fonts/MuseoSans/museosans-300italic-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-300italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-300italic-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-300italic-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-300italic-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-300italic-webfont.svg#museo_sans300_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans500';
+    src: url('fonts/MuseoSans/museosans-500-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-500-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-500-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-500-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-500-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-500-webfont.svg#museo_sans500') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans500_italic';
+    src: url('fonts/MuseoSans/museosans-500italic-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-500italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-500italic-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-500italic-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-500italic-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-500italic-webfont.svg#museo_sans500_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans700';
+    src: url('fonts/MuseoSans/museosans-700-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-700-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-700-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-700-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-700-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-700-webfont.svg#museo_sans700') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans700_italic';
+    src: url('fonts/MuseoSans/museosans-700italic-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-700italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-700italic-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-700italic-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-700italic-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-700italic-webfont.svg#museo_sans700_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans900';
+    src: url('fonts/MuseoSans/museosans-900-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-900-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-900-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-900-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-900-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-900-webfont.svg#museo_sans900') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'museo_sans900_italic';
+    src: url('fonts/MuseoSans/museosans-900italic-webfont.eot');
+    src: url('fonts/MuseoSans/museosans-900italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/MuseoSans/museosans-900italic-webfont.woff2') format('woff2'),
+         url('fonts/MuseoSans/museosans-900italic-webfont.woff') format('woff'),
+         url('fonts/MuseoSans/museosans-900italic-webfont.ttf') format('truetype'),
+         url('fonts/MuseoSans/museosans-900italic-webfont.svg#museo_sans900_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/* Global */
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #fff;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #fff;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #fff;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #fff;
+}
+html{
+    background-color: #ececec;
+}
+#home_html{
+    background-image: url('../img/HomeBG.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+body{
+    margin: 0px;
+}
+.inBl{
+    display: inline-block;
+}
+.inBlM{
+    display: inline-block;
+    vertical-align: middle;
+}
+input {
+    border: 1px solid #dacaa6;
+}
+input[type="text"], textarea{
+    padding-left: 5px;
+    font-family: "museo_sans500";
+}
+input[type="checkbox"], input[type="radio"]{
+   display: none !important;
+}
+.checkbox{
+    padding: 8px;
+    border: 2px solid #dacaa6;
+    cursor: pointer;
+}
+input[type="checkbox"]:checked + .checkbox{
+    background-image: url('../img/icons/checkboxValid.png');
+    background-size: 14px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #dacaa6;
+}
+input[type="radio"]:checked + .checkbox{
+    background-image: url('../img/icons/checkboxValid.png');
+    background-size: 14px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #dacaa6;
+}
+/*link and icon*/
+a.bg_icon {
+    display: block;
+    height: 42px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0.2;
+    cursor: pointer;
+}
+a.bg_icon:hover {
+    opacity: 1;
+}
+a.download_link{
+    background-image: url('../img/icons/download.png');
+        background-size: 40px;
+}
+a.eye_link{
+    background-image: url('../img/icons/eye.png');
+}
+a.pen_link{
+    background-image: url('../img/icons/pen.png');
+}
+a.doc_link{
+    background-image: url('../img/icons/file.png');
+    background-size: 32px;
+}
+a.folder_link{
+    background-image: url('../img/icons/folder.png');
+}
+a.accept_link{
+    background-image: url('../img/icons/accept.png');
+}
+a.refuse_link{
+    background-image: url('../img/icons/refuse.png');
+}
+
+@media screen and (max-width: 1244px){
+   a.download_link{
+        background-size: 30px;
+    }
+    a.eye_link{
+        background-size: 30px;
+    }
+    a.pen_link{
+        background-size: 30px;
+    }
+    a.doc_link{
+        background-size: 24px;
+    }
+    a.folder_link{
+        background-size: 30px;
+    } 
+    a.accept_link{
+        background-size: 30px;
+    }
+    a.refuse_link{
+        background-size: 30px;
+    }
+}
+
+/*************************/
+/* Home page - index.php */
+/*************************/
+
+#logo{
+    margin: auto;
+    text-align: center;
+    padding: 4% 0%;
+}
+#title{
+    margin: auto;
+    text-align: center;
+    
+}
+#title p{
+    font-family: 'museo_sans300';
+    font-size: 43px;
+    text-transform: uppercase;
+    color: #182a29;
+}
+
+#title h1{
+    font-family: 'museo_sans700';
+    font-size: 72px;
+    text-transform: uppercase;
+    color:  #fff;
+}
+#home_form{
+    text-align: center;
+    font-family: 'museo_sans300';
+}
+#home_form form {
+    display: inline-block;
+    width: 330px;
+}
+#home_form .label-block{
+    display: block;
+    margin: 15px 0px;
+}
+#home_form .label-block span{
+    display: none;
+}
+#home_form .label-block input{
+    padding: 15px 10px 15px 20px;
+    width: 300px;
+    background-color: rgba(218, 202, 166, 0.5);
+    border: none;
+    font-size: 20px;
+    color: #fff;
+}
+#option-block{
+    font-size: 15px;
+}
+#remember_label{
+    text-align: start;
+    color: #fff;
+}
+#remember_label input{
+    margin: 0px;
+    height: 14px;
+}
+#forget_password{
+    color: #dacaa6;
+}
+#option-block label, #option-block a{
+    width: 49%;
+}
+#connect{
+    margin-top: 20px;
+    color: #fff;
+    background-color: #182a29;
+    border: none;
+    padding: 15px 10px 15px 20px;
+    width: 100%;
+    font-size: 20px;
+    cursor: pointer;
+}
+#inscription p{
+    color:  #fff;
+}
+#inscription a{
+    color: #dacaa6;
+}
+@media screen and (max-width: 1280px) and (max-height: 720px), screen and (max-height: 760px){
+    #logo{
+      padding: 1% 0%;
+    }
+    #logo img {
+      width: 100px;
+    }
+    #title p{
+      font-size: 30px;  
+    }
+    #title h1{
+      font-size: 60px;  
+    }
+}
+@media screen and (max-width: 640px){
+    #logo {
+    padding: 1% 0%;
+  }
+  #logo img {
+    width: 70px;
+  }
+  #title p{
+    font-size: 20px;  
+  }
+  #title h1{
+    font-size: 40px;  
+  }
+}
+
+/*************************/
+/* Inscription page - inscription.php */
+/*************************/
+
+#inscription_form{
+    text-align: center;
+    font-family: 'museo_sans300';
+}
+#inscription_form form {
+    display: inline-block;
+    width: 330px;
+}
+#inscription_form .label-block{
+    display: block;
+    margin: 15px 0px;
+}
+#inscription_form .label-block span{
+    display: none;
+}
+#inscription_form .label-block input{
+    padding: 15px 10px 15px 20px;
+    width: 300px;
+    background-color: rgba(218, 202, 166, 0.5);
+    border: none;
+    font-size: 20px;
+    color: #fff;
+}
+#inscription_form .special-block{
+    display: block;
+    margin: 15px 0px;
+    padding: 15px 10px 15px 20px;
+    font-size: 20px;
+    color: #fff;
+    background-color: rgba(218, 202, 166, 0.5);
+    text-align: start;
+}
+#inscription_form .special-block p{
+    margin: 0px 0px 10px 0px;
+}
+#inscription_form .special-block input{
+    padding: 8px;
+    width: 83px;
+    margin-top: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px 10px 0px 0px;
+    font-size: 14px;
+}
+#inscription_form .special-block img{
+    width: 28px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+#inscription_form .option_group{
+    display: block;
+    margin: 15px 0px;
+    padding: 15px 10px 15px 20px;
+    font-size: 20px;
+    color: #fff;
+    background-color: rgba(218, 202, 166, 0.5);
+    text-align: start;
+}
+#inscription_form .option_group p{
+    margin: 0px 0px 10px 0px;
+}
+#inscription_form .option_group .inBl{
+    vertical-align: middle;
+    width: 28%;
+}
+#inscription_form .option_group .inBl.last{
+    vertical-align: middle;
+    width: 38%;
+}
+#inscription_form .option_group input{
+    height: 15px;
+}
+#send_inscription{
+    margin-top: 20px;
+    color: #fff;
+    background-color: #182a29;
+    padding: 15px 10px 15px 20px;
+    width: 100%;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+#inscription_form .box{
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    border: 1px solid #c7bc9d;
+    cursor: pointer;
+}
+#inscription_form .option_group input[type='checkbox']:checked + .box{
+    background-color: #dacaa6;
+    background-image: url('../img/icons/checkboxValid.png');
+    background-size: 14px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/*************************/
+/* Top Menu - top-menu.php */
+/*************************/
+#top-menu{
+    display: flex;    overflow: hidden;
+}
+#top-menu .blocs{
+    height: 100px;
+    padding: 16px 28px;
+    background-color: #dacaa6;
+    font-family: "museo_sans700";
+    text-transform: uppercase;
+    font-size: 15px;
+    text-align: center;
+}
+#top-menu .logo{
+    width: 90px;
+}
+#top-menu .date{
+    margin-left: 1px;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 50px;
+    flex-grow: 1;
+}
+#top-menu .profil{
+    width: 18%;
+    margin-left: 1px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 66px;
+    min-width: 250px;
+    display: block;
+    text-decoration: none;
+}
+#top-menu .deconnexion{
+    line-height: 96px;
+    display: block;
+    text-decoration: none;
+}
+#top-menu .icon_deconnect{
+    height: 54px;
+}
+#top-menu .profil .icon{
+    height: 54px;
+    margin-right: 20px;
+}
+@media screen and (max-width: 900px){
+    #top-menu .date{
+        display: none;
+    }
+    #top-menu .profil{
+        flex-grow : 1;
+    }
+    #top-menu .deconnexion{
+        flex-grow : 2;
+        max-width: 150px;
+    }
+}
+@media screen and (max-width: 554px){
+    #top-menu .logo{
+        display: none;
+    }
+}
+@media screen and (max-width: 400px){
+    #top-menu .blocs {
+        padding: 16px 20px;
+    }
+}
+/**************************************/
+/* Tableau de bord superadministrateur */
+/**************************************/
+#resp-list{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0px;
+    flex-wrap: wrap;
+}
+#resp-list .encart-resp{
+    display: flex;
+    height: 120px;
+    width:22%;
+    max-width: 314px;
+    min-width: 254px;
+    -webkit-box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 3px -1px rgba(0,0,0,0.75);
+    margin: 30px 5px;
+}
+#resp-list .encart-resp a{
+    display: inherit;
+    color: inherit;
+    width: 100%;
+    text-decoration: none;
+}
+#resp-list .icon-box{
+    background-color: #dacaa6;
+    min-width: 90px;
+    text-align: center;
+}
+#resp-list .icon-box img {
+    margin-top: 38px;
+    width: 35px;
+}
+#resp-list .content-box{
+    background-color: #fff;
+    width: 100%;
+}
+#resp-list .content-box h4{
+    font-family: 'museo_sans700';
+    color: #dacaa6;
+    margin: 25px 0px 5px 20px;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+#resp-list .content-box p{
+    font-family: 'museo_sans500';
+    margin: 0px 0px 0px 20px;
+}
+
+@media screen and (max-width: 1090px){
+    #resp-list .encart-resp{
+        max-width: 400px;
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 540px){
+    #resp-list .encart-resp{
+        max-width: 500px;
+        width: 90%;
+    }
+}
+
+/**************************************/
+/* Choix responsable des ventes pages */
+/**************************************/
+.page-container{
+    padding: 70px 10% 0px 10%;
+}
+#statistics{
+    display: flex;
+}
+#statistics .blocs{
+    background-color: #fff;
+    height: 260px;
+}
+#statistics h3{
+    font-family: "museo_sans500";
+    color: #6d767e;
+    font-weight: normal;
+    font-size: 17px;
+    margin: 0px;
+}
+#statistics .circles h3{
+    padding-bottom: 15px
+}
+#statistics .graphic h3{
+    position:absolute;
+    z-index: 1; 
+    left: 20px;
+    top: 15px;
+}
+#statistics .circles{
+    padding: 20px;
+    width: 60%;
+    margin: 20px 0px 20px 10px;
+}
+#statistics .graphic{
+    width: 40%;
+    margin: 20px 10px 20px 0px;
+    position: relative;
+    height: 300px;
+}
+#statistics .circles_container{
+    display: flex;
+    justify-content: space-around;
+}
+#statistics .circle{
+    height: 160px;
+    width: 160px;
+}
+#statistics .circle .progressbar-text{
+    font-family: "museo_sans700";
+    color: #363d45;
+    font-size: 42px;
+}
+#statistics .circle_title{
+    text-align: center;
+    font-family: "museo_sans500";
+    font-size: 20px;
+    color: #6d767e;
+}
+#graphic_container{
+    height: 100%;
+}
+#dashboard .arrow{
+    position: absolute;
+    bottom: 20px;
+    z-index: 2;
+    cursor: pointer;
+    width: 14px;
+    height: 30px;
+    background-repeat: no-repeat;
+}
+#dashboard .arrow.left{
+    left: 10px;
+    background-image: url('../img/icons/LG_FLECHE_GAUCHE.png');
+}
+#dashboard .arrow.right{
+    right: 10px;
+    background-image: url('../img/icons/LG_FLECHE_DROITE.png');
+}
+
+#dashboard-panel{
+    margin-bottom: 60px;
+}
+#dashboard-panel ul, #trace-panel ul{
+    list-style: none;
+    display: flex;
+    padding: 0px;
+    margin: 0px
+}
+#dashboard-panel ul li, #trace-panel ul li{
+    padding: 15px;
+    color: #fff;
+    background-color: #dacaa6;
+    font-family: museo_sans500;
+    border: 1px solid #D5D5D5;
+    cursor: pointer;
+}
+#dashboard-panel ul li.active, #trace-panel ul li.active{
+    background-color: #fff;
+    text-transform: uppercase;
+    color: #000;
+}
+.panel{
+    display: none;
+    background-color: #fff;
+}
+.panel.active{
+    display: block;
+}
+.dashtable{
+    border-collapse: collapse;
+    background-color: #fff;
+    width: 100%;
+}
+.dashtable td{
+    border: 1px solid #E1E1E1;
+}
+.dashtable thead tr {
+    color: #a39678;
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: "Museo_Sans500";
+}
+.dashtable thead tr span {
+    font-family: "Museo_Sans700";
+}
+.dashtable tbody tr {
+    text-align: center;
+}
+.dashtable tbody td {
+    font-size: 18px;
+}
+.dashtable tbody tr:nth-child(odd) {
+    background-color: #f8f8fb;
+}
+.dashtable tbody img {
+    opacity: 0.2;
+}
+.dashtable tbody img:hover {
+    opacity: 1;
+}
+.dashtable td {
+    border: 1px solid #E1E1E1;
+    font-family: "Museo_Sans500";
+    padding: 10px 40px;
+}
+#add_user, #create_rapport{
+    display: inline-block;
+    margin: 21px 16px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #70b93b;
+    font-family: "Museo_Sans500";
+    padding: 12px 60px 12px 12px;
+    text-align: start;
+    background-image: url('../img/icons/add_user.png');
+    background-repeat: no-repeat;
+    background-position: 262px 7px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 4px 3px 0px rgba(87,144,46,1);
+    -moz-box-shadow: 0px 4px 3px 0px rgba(87,144,46,1);
+    box-shadow: 0px 4px 3px 0px rgba(87,144,46,1);
+}
+#create_rapport{
+    padding: 12px;
+    background-image: none;
+}
+#add_user:hover, #create_rapport:hover {
+    background-color: #57902e;
+}
+#trace{
+    padding-top: 15px;
+}
+@media screen and (max-width: 1475px){
+    .dashtable td {
+        padding: 10px 20px;
+    }
+    .dashtable tbody td {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 1244px){
+    #statistics {
+        display: block;
+    }
+    #statistics .graphic {
+        width: 100%;
+    }
+    #statistics .circles {
+        width: 100%;
+        margin: 20px 0px 20px 0px;
+        padding: 0px;
+    }
+    #statistics .circle {
+       margin: 0px 5px;
+    }
+    #statistics .circles h3 {
+        padding: 15px;
+    }
+    #statistics .circle .progressbar-text{
+        font-size:  25px;
+    }
+    .dashtable tbody td {
+        font-size: 14px;
+    }
+    .dashtable td {
+        padding: 10px 10px;
+    }
+    .dashtable thead tr {
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 790px){
+    .page-container {
+        padding: 0px;
+    }   
+    .headband{
+        margin: 2px;
+    }
+}
+@media screen and (max-width: 630px){
+    #sales_report.page-container {
+        padding-left: 0px;
+        padding-top: 20px;
+    }
+    .page-container {
+        padding: 0px;
+    }
+    .dashtable td {
+        padding: 5px 5px;
+    }
+    .dashtable thead tr {
+        font-size: 10px;
+    }
+    .dashtable tbody td {
+        font-size: 11px;
+    } 
+    #trace-panel ul li{
+        font-size: 12px;
+    }
+    #create-rapport{
+        font-size: 12px;
+    }
+    #calendar, .calendar {
+        padding: 10px 0px;
+        height: 0px;
+        width: 0px;
+        padding: 0px;
+        border: none;
+    }
+}
+/*
+Profil page
+*/
+.info-list label span, #activity_choice p{
+    font-family: "museo_sans700";
+    font-size: 14px;
+}
+.info-list label input {
+    font-family: museo_sans300;
+    color: #000;
+    font-size: 14px;
+}
+.info-list .edit, .info-list .cancel{
+    background-color: #a39678;
+    color: #fff;
+    font-family: "Museo_sans300";
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    display: inline-block;
+    cursor: pointer;
+}
+.info-list label input.disabled{
+    background: none;
+    border: none;
+}
+.info-list label {
+    display: block;
+    margin: 10px 0px;
+}
+.info-list .box{
+    padding: 0px 8px;
+    margin-right: 5px;
+    border: 2px solid #dacaa6;
+    cursor: pointer;
+}
+.info-list input[type="checkbox"]:disabled + .box{
+    cursor: default;
+}
+.info-list input[type="checkbox"]:checked + .box{
+    background-image: url("../img/icons/checkboxValid.png");
+    background-color: #dacaa6;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 15px;
+}
+#info-team td:nth-child(3) {
+    flex-grow: 2;
+    width: 40%;
+}
+/*#activity_choice label{
+    display: none;
+}*/
+#activity{
+    font-family: museo_sans300;
+}
+.bloc{
+    transition: all 1s ease;
+    background-color: #f8f8fb;
+    margin: 0px 0px 50px 0px;
+}
+.bloc.noDisp{
+    display: none;
+}
+.bloc h2{
+    color: #a39678;
+    font-family: "Museo_sans700";
+    text-transform: uppercase;
+    background-color: #fff;
+    padding: 10px;
+    font-size: 20px;
+    margin: 0px;
+}
+#info-team h2, #valid-team h2{
+    background-color: #f8f8fb;
+}
+#info-team .vendors{
+    opacity: 0.6;
+}
+#info-team .vendors.noDisp{
+   display: none;
+}
+.bloc input[type='submit']{
+    background-color: #a39678;
+    color: #fff;
+    font-family: "Museo_sans300";
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.info-list .noDisp{
+    display: none;
+}
+.info-list{
+    padding: 20px;
+}
+.headband{
+    text-align: center;
+    height: 80px;
+    background-color: #fff; 
+}
+.headband h1 {
+    color: #a39678;
+    font-family: "Museo_sans700";
+    margin: 0px;
+    font-size: 22px;
+    text-transform: uppercase;
+    /*line-height: 80px;*/
+    padding: 28px;
+}
+#panel-formation .date-sort, #panel-vendeur .date-sort, #panel-gestion .date-sort{
+    float: right;
+    display: flex;
+    align-items: center;
+}
+#panel-formation .date-sort img, #panel-vendeur .date-sort img, #panel-gestion .date-sort img{
+    padding: 0px 15px;
+    cursor: pointer;
+}
+#panel-formation .date-sort label, #panel-vendeur .date-sort label, #panel-gestion .date-sort label{
+    padding: 24px 24px;
+    border-left: 1px solid #dcdcdc;
+}
+#calendar, .calendar, .calendar_filter{
+    padding: 10px 0px;
+}
+
+.return-button{
+    background-image: url('../img/icons/back.png');
+    height: 50px;
+    width: 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #A39678;
+    margin-bottom: 15px;
+    cursor: pointer;
+    display: block;
+}
+.return-button-whitebg{
+    background-color: #fff;
+}
+
+@media screen and (max-width: 630px){
+    
+    #panel-formation .date-sort label,  #panel-vendeur .date-sort label{
+        padding: 0px;
+        border-left: 0px;
+    }
+    
+    #calendar, .calendar {
+        width: 0px;
+        height: 1px;
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    .date-sort{
+        padding: 24px 0px;
+    }
+    
+}
+
+.headband .return-button{
+    float: left;
+    margin: 15px 0px 15px 15px;
+}
+/* 
+ Vendor account creation
+*/
+#create_vendor{
+    
+}
+
+#create_vendor.page-container{
+    font-family: Museo_Sans500;
+    font-size: 16px;
+    color: #a39678;
+    text-transform: uppercase;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#create_vendor label, .checkbox_container span{
+    display: inline-block;
+    width: 33%;
+    vertical-align: middle;
+    text-align: end;
+    margin: 10px 2% 0px -2px;
+    padding: 10px 0px;
+}
+
+#create_vendor select, #create_vendor input[type="text"], .input_box{
+    display: inline-block;
+    width: 33%;
+    margin: 10px 0px;
+    padding: 10px 0px;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+.input_box{
+    width: 50%;
+}
+/*#create_vendor input[type="checkbox"]{
+    display: inline-block;
+    vertical-align: middle;
+    text-align: end;
+    margin: 10px 2% 0px -2px;
+    padding: 10px 0px;
+}*/
+#create_vendor .input_box label, #create_vendor .input_box input, #create_vendor .input_box span{
+   width: initial; 
+   margin: 0px 10px 4px 0px;
+   padding: 8px;
+}
+#create_vendor .input_box label{
+    margin: 0px 40px 0px 10px;
+}
+#create_vendor .input_box span{
+    margin-left: 5px;
+}
+#create_vendor select{
+    padding: 10px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    background-image: url("../img/icons/select_arrow.png");
+    background-position: 95% 50%;
+    background-repeat: no-repeat;
+    color: #a39678;
+    font-family: Museo_sans500;
+    opacity: 1;
+    border: 1px solid;
+    box-shadow: none;
+}
+#create_vendor .input_box.special label {
+    margin: 10px 40px 0px 10px;
+}
+#create_vendor #entry_date{
+    width: 20%;
+}
+#create_vendor #img_calendar{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 15px;
+}
+#create_vendor .send_button{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: none;
+    padding: 12px 0px;
+    font-family: Museo_Sans500;
+    color: #fff;
+    font-size: 16px;
+    background-color: #dacaa6;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 33%;
+}
+@media screen and (max-width: 1200px){
+    
+    #create_vendor.page-container{
+        padding: 70px 0px;
+        width: 80%;
+    }
+    #create_vendor .input_box.special{
+        width: 50%;
+    }
+    
+}
+@media screen and (max-width: 668px){
+    
+    #create_vendor.page-container{
+        width: 100%;
+        font-size: 14px;
+    }
+    
+}
+@media screen and (max-width: 480px){
+    
+    #create_vendor.page-container{
+        padding: 70px 50px;
+        width: initial;
+        font-size: 14px;
+    }
+    #create_vendor label, .checkbox_container span {
+        width: initial;
+        text-align: start;
+        margin: 0px;
+        padding: 0px;
+    }
+    #create_vendor select, #create_vendor input[type="text"], .input_box {
+        width: 100%;
+        display: block;
+        margin: 5px 0px 20px 0px;
+    }
+    #create_vendor .input_box label{
+        width: 100%;
+    }
+    #create_vendor .send_button{
+        width: 100%;
+    }
+    #create_vendor #entry_date {
+        display: inline-block;
+        width: 65%;
+        margin: 10px 0px;
+    }
+    
+}
+#sales_report .sales_block{
+    background: #fff;
+    min-height: 200px;
+    margin-bottom: 30px;
+}
+#sales_report .sales_block .little_headband{
+    text-align: center;
+    font-family: Museo_sans700;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 1px 0px;
+    background-color: #f8f8fb;
+}
+#sales_report .sales_block .content{
+    height: 100%;
+}
+#sales-headband #calendar{
+    height: 25px;
+    padding: 0px;
+}
+#sales-headband #img_calendar{
+    vertical-align: middle;
+}
+#commercial_activity{
+    min-height: 200px;
+}
+#commercial_activity select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-image: url('../img/icons/select_arrow.png');
+    background-repeat: no-repeat;
+    background-position: 90%;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0px 20px;
+    font-size: 16px;
+    text-align: center;
+    min-width: 120px;
+}
+#commercial_activity option{
+    text-align: center;
+    font-family: Museo_Sans500;
+}
+#commercial_activity input {
+    height: 100%;
+    width: 89%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0px 5%;
+    text-align: center;
+    font-family: Museo_Sans500;
+    font-size: 16px;
+}
+#commercial_activity td{
+    padding: 0px;
+}
+#commercial_activity thead td{
+    height: 52px;
+}
+#commercial_activity tbody td{
+    min-height: 52px;
+    height: 52px;
+}
+#commercial_activity tbody tr.disabled td select, #commercial_activity tbody tr.disabled td input{
+    color: #a39678;
+    text-transform: uppercase;
+    font-family: Museo_Sans300;
+}
+.lbtn{
+    transition: all 0.5s;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 0px 10px; 
+    cursor: pointer;
+    text-indent: -999px;
+    overflow: hidden;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 16px;
+    color: #fff;
+}
+.lbtn.disabled{
+    cursor: default;
+}
+.lbtn.noDisp{
+    width: 0px;
+    height: 0px;
+    margin: 0px; 
+}
+.lbtn.squared{
+    transition: all 0.5s;
+    border-radius: 0px;
+    padding: 10px;
+    width: 60%;
+    margin: 0px;
+    text-indent: 0px;
+}
+.lbtn.red{
+    background-color: #db4c3c;
+}
+.lbtn.orange{
+    background-color: #ee7e2a;
+}
+.lbtn.green{
+    background-color: #70b93b;
+}
+#sales_report textarea {
+    resize: none;
+    width: 98%;
+    min-height: 200px;
+    border: none;
+    resize: none;
+    padding: 0px;
+    padding-top: 5px;
+    margin: 0px;
+    font-family: Museo_Sans500;
+    font-size: 16px;
+}
+td.rbtn{
+    position: absolute;
+    width: 50px;
+    min-height: initial;
+    height: 47px;
+    border: none;
+    margin-left: 7px;
+    margin-top: 7px;
+    min-height: initial;
+    height: 35px;
+    width: 35px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+td.trash{
+    background-image: url('../img/icons/trash.png');
+}
+td.add{
+    width: 80px;
+    background-image: url('../img/icons/Ajouter.png');
+    margin-left: 45px;
+    padding: 0px 4px !important;
+}
+td.add.new{
+    margin-left: 7px;
+    padding: 0px !important;
+}
+td.last{
+    min-width: 110px;
+}
+.little_headband h2{
+    display: inline-block;
+}
+.little_headband select{
+    -webkit-appearance: none;
+    border: 1px solid #dacaa6;
+    height: 30px;
+    width: 130px;
+    border-radius: 0px;
+    background-image: url('../img/icons/select_arrow.png');
+    background-repeat: no-repeat;
+    background-position: 105px;
+    margin: 0px 0px 0px 20px;
+    padding-left: 5px;
+}
+
+#sales-headband h1{
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+#sales-headband input{
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: middle;
+    height: 22px;
+    border: 1px solid #dcdcdc;
+}
+#sales_block_persons{
+    text-align: left;
+}
+#sales_block_persons .added_person{
+    cursor: pointer;
+    border: 1px solid #dcdcdc;
+    font-family: Museo_Sans500;
+    color: #999999;
+    padding: 10px 60px 10px 10px;
+    background-image: url('../img/icons/iconX.png');
+    background-repeat: no-repeat;
+    background-position: 90%;
+    display: inline-block;
+    margin: 10px;
+}
+#date_sales{
+    display: inline-block;
+    vertical-align: middle;
+}
+#sales-form{
+    text-align: center;
+}
+#sales-form input[type='submit']{
+    font-family: Museo_Sans700;
+    color: #fff;
+    background: #dacaa6;
+    text-transform: uppercase;
+    padding: 15px 40px;
+    margin: auto;
+    font-size: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+@media screen and (max-width: 826px){
+    
+    #sales_report{
+        padding: 70px 10% 0px 10%;
+        padding-left: 0px;
+        padding-top: 20px;
+    }
+    #commercial_activity thead td{
+        font-size: 11px;
+    }
+    #commercial_activity select, #commercial_activity input{
+        font-size: 11px;
+        min-width: 50px;
+    }
+    #commercial_activity select{
+        min-width: 90px;
+    }
+}
+@media screen and (max-width: 826px){
+    
+    #sales-headband h1{
+        font-size: 16px;
+    }
+    
+}
+/* Page formation */
+#formation{
+    padding: 20px 10% 0px 10%;
+}
+#formation-form .top_form{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+}
+#formation-form .top_form label{
+    display: block;
+}
+#formation-form .top_form span{
+    display: inline-block;
+    font-family: Museo_Sans500;
+    width: 33%;
+    color: #a39678;
+    margin-right: 10px;
+    text-align: end;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+#formation-form .top_form input{
+    display: inline-block;
+    width: 33%;
+    height: 30px;
+    margin-bottom: 12px;
+    vertical-align: middle;
+    padding-left: 5px;
+}
+#formation-form .top_form img#img_calendar {
+    margin-left: 20px;
+    vertical-align: middle;
+    margin-right: -20px;
+}
+#formation-form span.date_block{
+    text-align: start;
+}
+#formation-form span.date_block input{
+    width: 50%;
+    vertical-align: middle;
+}
+#formation-form span.date_block .calendar{
+    vertical-align: middle;
+    width: 60%;
+    margin-left: 2px;
+    height: 15px;
+    margin-bottom: 0px;
+}
+#formation-form .middle_form{
+    background-color: #fff;
+    padding-bottom: 20px;
+}
+#formation-form .mainblocs .little_headband{
+    background-color: #f8f8fb;
+    padding: 0px 20%;
+    margin: 40px 0px;
+}
+#formation-form .mainblocs .little_headband h2 {
+    display: inline-block;
+    font-family: Museo_sans700;
+    color: #a39678;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+#formation-form .content{
+    padding: 0px 20%;
+}
+#formation-form .content label {
+    display: block;
+    color: #182a29;
+    font-family: Museo_sans500;
+    margin: 8px 0px;
+}
+#formation-form input{
+    font-family: Museo_sans500;
+    font-size: 16px;
+}
+#formation-form .content input {
+    border: 2px solid #dacaa6;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 20px;
+    padding-left: 5px;
+}
+#formation-form .content input.last{
+    margin-bottom: 0px;
+}
+#formation-form .content .note_box label, #formation-form .bottom_form label {
+    display: inline-block;
+    cursor: pointer;
+    margin: 18px 0px;
+}
+#formation-form .content .note_box span {
+    border: 2px solid #dacaa6;
+    padding: 5px 10px;
+}
+#formation-form .bottom_form label span{
+    border: 2px solid #dacaa6;
+    padding: 0px 9px;
+}
+#formation-form .content .note_box input:checked + span {
+    background-color: #dacaa6;
+    color: #fff;
+}
+#formation-form .bottom_form, #entretien-form .bottom_form{
+    text-align: center;
+}
+#formation-form .bottom_form span{
+    font-family: Museo_sans500;
+    font-size: 16px;
+    margin-left: 5px;
+}
+#formation-form .bottom_form input:checked + span{
+    
+}
+#formation-form .comp_action_box{
+    text-align: right;
+    margin-top: 20px;
+}
+#formation-form .comp_action_box span{
+    display: inline-block;
+    width: 20%;
+    margin-right: 0px;
+    text-align: left;
+    font-family: Museo_sans300;
+    font-size: 18px;
+    color: #a39678;
+    margin-left: -10px;
+}
+#formation-form .comp_action_box input{
+    display: inline-block;
+    width: 80%;
+}
+#formation-form input[type="submit"] {
+    font-family: Museo_sans500;
+    font-size: 16px;
+    font-family: Museo_Sans700;
+    color: #fff;
+    background: #dacaa6;
+    text-transform: uppercase;
+    padding: 15px 80px;
+    margin: auto;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    cursor: pointer;
+}
+.input_style{
+    font-family: Museo_sans500;
+    font-size: 16px;
+    font-family: Museo_Sans700;
+    color: #fff;
+    background: #dacaa6;
+    text-transform: uppercase;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 50px 10px;
+    padding: 15px 50px;
+    text-decoration: none; 
+}
+@media screen and (max-width: 1024px){
+    #formation-form .top_form {
+        width: 80%;
+    }
+}
+@media screen and (max-width: 790px){
+   #formation-form .page-container {
+        padding: 70px 0% 0px 0%;
+    } 
+
+    #formation-form h1{
+        font-size: 18px;
+    } 
+    #formation-form .top_form {
+        width: 100%;
+    }
+    #formation-form .little_headband{
+        padding: 0px; 
+        text-align: center;
+    }
+    #formation-form .content {
+        padding: 0px 5% 60px 5%;
+    }
+    #formation-form .calendar{
+        padding: 10px 0px;
+        border: 1px solid #dacaa6;
+    }
+    #formation-headband h1{
+        font-size: 16px;
+    } 
+    #formation-form .top_form span {
+        font-size: 20px;
+    }
+    #formation-form .bottom_form {
+        padding: 30px 5%;
+    }
+}
+@media screen and (max-width: 500px){
+    #formation-form .content .note_box span {
+        padding: 3px 5px;
+    }
+    #formation-form .comp_action_box span {
+        font-size: 12px;
+    }
+}
+
+/* Entretien */
+#entretien-form{
+    text-align: center;
+}
+#entretien-form .page-container{
+    text-align: left;
+}
+#entretien-form .content .blocks{
+    text-align: center;
+    margin-bottom: 20px;
+}
+#entretien-form .content .blocks label{
+    display: inline-block;
+    text-align: center;
+    max-width: 120px;
+    font-size: 12px;
+    vertical-align: top;
+}
+#entretien-form .content .blocks label input{
+    border: 2px solid #dacaa6;
+    height: 50px;
+    width: 60px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+}
+#entretien-form .content .blocks label span{
+    display: block;
+    margin: 0 auto;
+    color: #a39678;
+}
+#entretien-form .top_form{
+    text-align: center;
+    width: 50%;
+    margin: 0px auto;
+}
+#entretien-form .top_form label{
+    display: block;
+}
+#entretien-form .top_form span{
+    display: inline-block;
+    font-family: Museo_Sans500;
+    width: 33%;
+    color: #a39678;
+    margin-right: 10px;
+    text-align: end;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+#entretien-form .top_form input{
+    display: inline-block;
+    width: 33%;
+    height: 30px;
+    margin-bottom: 12px;
+    vertical-align: middle;
+    padding: 0px;
+}
+#entretien-form .top_form select{
+    display: inline-block;
+    width: 33%;
+    height: 35px;
+    margin-bottom: 12px;
+    vertical-align: middle;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid #dacaa6;
+    border-radius: 0px;
+    background-color: #fff;
+}
+#entretien-form .top_form img#img_calendar {
+    margin-left: 20px;
+    vertical-align: middle;
+}
+#entretien-form .little_headband{
+    background-color:#f8f8fb;
+    padding: 0px 20%;
+    margin-top: 50px;
+}
+#entretien-form .content{
+    background-color: #fff;
+    padding: 0px 20% 60px 20%;
+}
+#entretien-form .content label {
+    display: block;
+    color: #182a29;
+    font-family: Museo_sans500;
+    margin: 8px 0px;
+}
+.quick_title{
+    color: #182a29;
+    font-family: Museo_sans500;
+    padding: 20px 0px;
+    display: block;
+}
+.quick_title.last{
+    padding: 20px 0px 0px 0px;
+}
+#entretien-form .content input {
+    border: 2px solid #dacaa6;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 20px;
+}
+#entretien-form label.bottom_valid{
+    display: inline-block;
+    margin: 20px 0px;
+}
+#entretien-form label.bottom_valid .checkbox{
+    padding: 0px 8px;
+    margin-right: 5px;
+}
+#entretien-form label.bottom_valid + span{
+    font-family: Museo_sans500;
+}
+#entretien-form input, #entretien-form select {
+    font-family: Museo_sans500;
+    font-size: 16px;
+    border: 2px solid #dacaa6;
+}
+#entretien-form .little_headband h2 {
+    display: inline-block;
+    font-family: Museo_sans700;
+    color: #a39678;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+#entretien-form .middle_form textarea{
+    resize: none;
+    width: 100%;
+    border: 2px solid #dacaa6;
+    height: 80px;
+    margin-bottom: 20px;
+    font-family: Museo_sans500;
+    font-size: 16px;
+}
+#entretien-form .content label span {
+    margin-bottom: 5px;
+    display: block;
+}
+#entretien-form .bottom_form label{
+    text-align: right;
+}
+#entretien-form .bottom_form label span{
+    display: inline-block;
+    width: 29%;
+    vertical-align: middle;
+    text-align: left;
+    color: #a39678;
+    font-size: 15px;
+}
+#entretien-form .bottom_form label input{
+    display: inline-block;
+    width: 68%;
+    vertical-align: middle;
+}
+#entretien-form input[type="submit"] {
+    font-family: Museo_sans500;
+    font-size: 16px;
+    font-family: Museo_Sans700;
+    color: #fff;
+    background: #dacaa6;
+    text-transform: uppercase;
+    padding: 15px 80px;
+    margin: auto;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 40px;
+    cursor: pointer;
+}
+@media screen and (max-width: 1070px){
+    #entretien-form .bottom_form label span {
+        display: block;
+        width: 100%;
+    }
+    #entretien-form .bottom_form label input {
+        display: block;
+        width: 100%;
+    }
+}
+@media screen and (max-width: 790px){
+   #entretien-form .page-container {
+        padding: 70px 0% 0px 0%;
+    } 
+}
+@media screen and (max-width: 720px){
+    #entretien-form .top_form {
+        width: 100%;
+    }
+    #entretien-form .little_headband{
+        padding: 0px; 
+        text-align: center;
+    }
+    #entretien-form .content {
+        padding: 0px 5% 60px 5%;
+    }
+}
+/* ------- Error Message -------- */
+html body .modal{
+    border: 2px solid #18a522;
+    background-color: rgba(255, 255, 255, 1);
+    color: #18a522;
+    font-family: Museo_Sans700;
+    text-transform: uppercase;
+    font-size: 18px;
+    position: absolute;
+    width: 50%;
+    margin-top: -30px;
+    margin-left: -250px;
+    left: 50%;
+    top: 175px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    cursor: pointer;
+    text-align: center;
+    z-index: 1;
+}
+
+.modal-success{
+    background-image: url("../img/icons/opeX.png");
+    border: 2px solid #18a522 !important; 
+    color: #18a522 !important;
+}
+
+.modal-error{
+    background-image: url("../img/icons/closeX.png");
+    border: 2px solid #cd1e3d !important;
+    color: #cd1e3d !important;
+}
+.input_error{
+    border: 2px solid #cd1e3d !important;
+}
+.confirm{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    background: #fff;
+    border: 1px solid #DACAA6;
+    text-align: center;
+    display : none;
+}
+.confirm p {
+    margin: 0 auto;
+    padding: 10px;
+    font-family: "museo_sans500";
+    background: #dacaa6;
+}
+.confirm span {
+    width: 30%;
+    padding: 20px 0px;
+    display: inline-block;
+    font-family: "museo_sans500";
+    cursor : pointer;
+        margin: 10px 10px;
+}
+.confirm span:hover {
+    background: #DACAA6;
+}
+#pw_form{
+    text-align: center;
+}
+#pw_form form span{
+    font-family: "museo_sans700";
+    font-size: 20px;
+    margin-bottom: 10px;
+    display: block;
+    margin-top: 10px;
+}
+#pw_form form label{
+    display : block;
+}
+#pw_form form input[type="submit"]{
+    margin-top: 20px;
+    color: #fff;
+    background-color: #182a29;
+    padding: 15px 10px 15px 20px;
+    width: 330px;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+#pw_form form label input{
+    padding: 15px 10px 15px 20px;
+    width: 300px;
+    background-color: rgba(218, 202, 166, 0.5);
+    border: none;
+    font-size: 20px;
+    color: #fff;
+}
+.error_modal{
+    color: #F00;
+    font-style: italic;
+    font-family: "museo_sans300";
+}
+.error_input{
+    border: 2px solid #F77 !important;
+}
+.error_radio + span{
+    border: 2px solid #F77 !important;
+}
+#commercial_activity .newMark{
+    display : none;
+    position: absolute;
+    background: #fff;
+    border: 1px solid black;
+    padding: 5px;
+}
+#commercial_activity .newMark p{
+    margin: 5px 0px 0px 0px;
+}
+#commercial_activity .newMarkName{
+    border: 1px solid #CECECE;
+    height: 25px;
+    margin: 10px 0px;
+}
+#commercial_activity .cancelMark, #commercial_activity .validMark{
+    width: 48%;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px 0px;
+}
+#commercial_activity .cancelMark:hover, #commercial_activity .validMark:hover{
+    background: #DACAA6;
+}
