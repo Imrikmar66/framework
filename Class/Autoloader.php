@@ -28,9 +28,7 @@ function Appli_autoload($className) {
             return true;
         }
     }
-    
-    
-    
+
     return false; 
 } 
 
