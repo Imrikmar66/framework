@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/backend_header.php';
-$ct = Controller::getController("index");
+$controller = $_GET['C'];
+$ct = Controller::getController($controller);
 $ct->displayView();
 ?>

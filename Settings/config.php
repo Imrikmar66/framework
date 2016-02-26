@@ -24,7 +24,7 @@ define('URI_CLASS', URI_FOLDER.'/Class');
 define('URI_MOD', URI_FOLDER.'/Modules');
 define('URI_TEMPLATE', URI_FOLDER.'/View');
 define('URI_CONTROLLERS', URI_FOLDER.'/Controllers');
-define('URI_CONTROL', URI_FOLDER.'/Control');
+define('URI_SETTINGS', URI_FOLDER.'/Settings');
 
 /* ERROR CODE */
 
