@@ -12,10 +12,10 @@ function Appli_autoload($className) {
     }
     
     //Basic classes
-    $class_folders = scandir(URI_CLASS);
+    $class_folders = scandir(URI_FRAMEWORK);
     foreach($class_folders as $folder){
-        if (file_exists(URI_CLASS.'/'.$folder.'/'.$className . '.php')) { 
-            require_once URI_CLASS.'/'.$folder.'/'.$className . '.php'; 
+        if (file_exists(URI_FRAMEWORK.'/'.$folder.'/'.$className . '.php')) { 
+            require_once URI_FRAMEWORK.'/'.$folder.'/'.$className . '.php'; 
             return true; 
         } 
     }

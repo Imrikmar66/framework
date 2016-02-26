@@ -7,7 +7,7 @@ if(MODE_DEV == TRUE){
 }
 require_once URI_SETTINGS.'/functions.php';
 require_once URI_SETTINGS.'/smarty-master/libs/Smarty.class.php';
-require_once URI_CLASS.'/Autoloader.php';
+require_once URI_FRAMEWORK.'/Autoloader.php';
 session_start();
 
 load_modules();

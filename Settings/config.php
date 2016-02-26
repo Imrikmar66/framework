@@ -17,10 +17,10 @@ define('URL_FOLDER', URL_SERVOR.'/PlanetCatalunya');
 define('URL_PAGES', URL_FOLDER."/Pages");
 define('URL_RESSOURCES', URL_PAGES."/Ressources");
 define('URL_INCLUDES', URL_PAGES."/Includes");
-define('URL_CLASS', URL_FOLDER."/Class");
+define('URL_FRAMEWORK', URL_FOLDER."/Framework");
 
 define('URI_FOLDER', dirname(dirname(__FILE__)));
-define('URI_CLASS', URI_FOLDER.'/Class');
+define('URI_FRAMEWORK', URI_FOLDER.'/Framework');
 define('URI_MOD', URI_FOLDER.'/Modules');
 define('URI_TEMPLATE', URI_FOLDER.'/View');
 define('URI_OVERRIDES', URI_FOLDER.'/Overrides');

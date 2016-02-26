@@ -1,5 +1,5 @@
 <?php
-require_once URI_CLASS."/Tools/PHPMailer/PHPMailerAutoload.php";
+require_once URI_FRAMEWORK."/Tools/PHPMailer/PHPMailerAutoload.php";
 
 class CustomMail implements JsonSerializable {
     
