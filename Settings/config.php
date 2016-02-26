@@ -23,6 +23,7 @@ define('URI_FOLDER', dirname(dirname(__FILE__)));
 define('URI_CLASS', URI_FOLDER.'/Class');
 define('URI_MOD', URI_FOLDER.'/Modules');
 define('URI_TEMPLATE', URI_FOLDER.'/View');
+define('URI_OVERRIDES', URI_FOLDER.'/Overrides');
 define('URI_CONTROLLERS', URI_FOLDER.'/Controllers');
 define('URI_SETTINGS', URI_FOLDER.'/Settings');
 

@@ -1,6 +1,17 @@
 <?php
 
 function Appli_autoload($className) { 
+    
+    //Overwritten classes
+    $class_rewrite_folders = scandir(URI_OVERRIDES);
+    foreach($class_rewrite_folders as $folder){
+        if (file_exists(URI_OVERRIDES.'/'.$folder.'/'.$className . '.php')) { 
+            require_once URI_OVERRIDES.'/'.$folder.'/'.$className . '.php'; 
+            return true; 
+        } 
+    }
+    
+    //Basic classes
     $class_folders = scandir(URI_CLASS);
     foreach($class_folders as $folder){
         if (file_exists(URI_CLASS.'/'.$folder.'/'.$className . '.php')) { 
@@ -9,6 +20,7 @@ function Appli_autoload($className) {
         } 
     }
     
+    //Controller classes
     $controllers_folders = scandir(URI_CONTROLLERS);
     foreach($controllers_folders as $folder){
         if (file_exists(URI_CONTROLLERS.'/'.$folder.'/'.$className . '.php')) { 
@@ -17,6 +29,7 @@ function Appli_autoload($className) {
         } 
     }
     
+    //Mods classes
     $mods_folders = scandir(URI_MOD);
     foreach($mods_folders as $folder){
         if (file_exists(URI_MOD.'/'.$folder.'/'.$className . '.php')) { 
