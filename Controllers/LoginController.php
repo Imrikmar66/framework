@@ -1,17 +1,17 @@
 <?php
 
-class IndexController extends Controller {
+class LoginController extends Controller {
     
     protected function defineMainView() {
-        $this->mainView = "index";
+        $this->mainView = "login";
     }
     
     protected function authenticationRequirement() {
-        return false;
+        false;
+    }
+
+    protected function errorLoadingController() {
+         $this->mainView = "index";
     }
     
-    protected function errorLoadingController() {
-        $this->mainView = "index";
-    }
-      
 }

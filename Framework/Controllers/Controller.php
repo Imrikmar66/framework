@@ -13,6 +13,7 @@ abstract class Controller {
             else
                 $this->errorLoadingController("Not authentified");
         }
+        $this->defineMainView();
     }
     
     /* ---- Protected ---- */
@@ -20,6 +21,7 @@ abstract class Controller {
         return URI_TEMPLATE.'/'.$viewName.'.tpl';
     }
     
+    abstract protected function defineMainView();
     abstract protected function authenticationRequirement();
     abstract protected function errorLoadingController();
 
