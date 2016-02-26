@@ -27,6 +27,10 @@ function Appli_autoload($className) {
             require_once URI_MOD.'/'.$folder.'/class/'.$className . '.php'; 
             return true;
         }
+        else if (file_exists(URI_MOD.'/'.$folder.'/controllers/'.$className . '.php')) {
+            require_once URI_MOD.'/'.$folder.'/controllers/'.$className . '.php'; 
+            return true;
+        }
     }
 
     return false; 
