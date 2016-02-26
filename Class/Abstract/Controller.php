@@ -2,14 +2,23 @@
 
 abstract class Controller {
     
+    protected $mainView = "";
     protected $tpl_vars = array();
+    protected $html;
     
-    public function loadView($viewName){
+    public function loadView($view){
         $smarty = new Smarty();
-        $template = $this->getView($viewName);
+        $template = $this->getView($view);
         $smarty->assign($this->tpl_vars);
-        $html = $smarty->fetch($template);
-        echo $html;
+        $this->html = $smarty->fetch($template);  
+    }
+    
+    public function displayView($view = null){
+        if($view === null)
+            $view = $this->mainView;
+       
+        $this->loadView($view);
+        echo $this->html;
     }
     
     protected function getView($viewName){
@@ -17,7 +26,7 @@ abstract class Controller {
     }
     
     public static function getController($name){
-        $controller = $name."Controller";
+        $controller = ucfirst($name)."Controller";
         return new $controller();
     }
     
