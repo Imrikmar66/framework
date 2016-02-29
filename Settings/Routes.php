@@ -1,4 +1,4 @@
 <?php
-Routes::addRoute('index', 'index');
-Routes::addRoute('login', 'login');
-Routes::addRoute('dashboard', 'dashboard');
+Route::addRoute('index', 'index');
+Route::addRoute('login', 'login');
+Route::addRoute('dashboard', 'dashboard', 404);
