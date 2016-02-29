@@ -15,9 +15,11 @@ class LoginController extends Controller {
         else if($this->isPOST()){
             $user = new User();
             $user->getUserByEmail($this->POST('email'));
-            $loggedIn = $user->checkAuth($this->POST('password'));
-            if($loggedIn)
-                $form_login = "connected";
+            if($user->checkAuth($this->POST('password'))){
+                $token = $user->createAuthToken();
+                Authentication::validAuth($token, array());
+                Navigation::navigateTo('dashboard');
+            }
             else
                 $form_login = "failed";
         }

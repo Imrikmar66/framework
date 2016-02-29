@@ -229,19 +229,24 @@ abstract class AbstractUser extends ObjectModel {
         
     }
     
+    public function createAuthToken(){
+        return hash('sha256', HASH_ADDITIONAL_VALUE."http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"].$_SERVER['HTTP_USER_AGENT']).time()."-".$this->id;;
+    }
+    
     /* ---------- protected method ---------- */
     
     protected function getObjectById($id) {
         $this->getUserById($id);
     }
     
-    protected function createToken(){
+    protected function createRememberMeToken(){
         return md5(HASH_ADDITIONAL_VALUE.$this->id.$this->email.rand());
     }
     
     protected function rememberMe(){
         
-        $token = $this->createToken();
+        $token = $this->createRememberMeToken();
+        
         
         $params_a = array(
            "request" => "DELETE FROM User_rmbrme_info WHERE user_id=?",
