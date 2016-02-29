@@ -5,7 +5,7 @@ class RouteParameter {
     protected $name;
     protected $filter;
     
-    function __construct($name, $filter = '') {
+    function __construct($name, $filter = '[a-zA-z1-9]+') {
         $this->name = $name;
         $this->filter = $filter;
     }
@@ -27,7 +27,7 @@ class RouteParameter {
     }
     
     function test($value){
-        return preg_match('/'.$this->filter.'/', $value);
+        return preg_match('/^'.$this->filter.'$/', $value);
     }
     
 }
