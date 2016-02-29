@@ -66,13 +66,13 @@ class Route {
         return $this;
     }
     
-    function addGET($param){
-        array_push($this->GET_params, $param);
+    function addGET($name, $test = ''){
+        array_push($this->GET_params, new RouteParameter($name, $test));
         return $this;
     }
     
-    function addPOST($param){
-        array_push($this->POST_params, $param);
+    function addPOST($name, $test = ''){
+        array_push($this->POST_params, new RouteParameter($name, $test));
         return $this;
     }
     
@@ -133,13 +133,13 @@ class Route {
             //check needed parameters
             $allNeededParams = true;
             foreach($route->getGET_params() as $getParam){
-                if(!array_key_exists($getParam, $_GET)){
+                if(!array_key_exists($getParam->getName(), $_GET)){
                     $allNeededParams = false;
                     break;
                 }     
             }
             foreach($route->getPOST_params() as $postParam){
-                if(!array_key_exists($postParam, $_POST)){
+                if(!array_key_exists($postParam->getName(), $_POST)){
                     $allNeededParams = false;
                     break;
                 }     
