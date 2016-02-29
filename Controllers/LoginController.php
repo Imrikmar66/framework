@@ -5,12 +5,23 @@ class LoginController extends Controller {
     
     public function main(){
         
+        /* --- Template vars --- */
+        $form_login = &$this->tpl_vars["form_login"];
+        /* --------------------- */
+        
         if($this->isGET()){
-            $this->tpl_vars["form_login"] = $this->makeBaseLoginForm();
+            $form_login = $this->makeBaseLoginForm();
         }
         else if($this->isPOST()){
-            $user = User::getUserByEmail($this->POST("username"));
+            $user = new User();
+            $user->getUserByEmail($this->POST('email'));
+            $loggedIn = $user->checkAuth($this->POST('password'));
+            if($loggedIn)
+                $form_login = "connected";
+            else
+                $form_login = "failed";
         }
+
         parent::main();
     }
     
@@ -30,7 +41,7 @@ class LoginController extends Controller {
     public function makeBaseLoginForm() {
         return "
             <form id='login-form' method='post'>
-                <input type='text' name='username' /><br />
+                <input type='text' name='email' /><br />
                 <input type='password' name='password' /><br />
                 <input type='submit'>
             </form>
