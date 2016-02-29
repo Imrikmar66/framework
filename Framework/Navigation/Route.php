@@ -7,13 +7,15 @@ class Route {
     protected $url;
     protected $controller;
     protected $http_code;
-    protected $parameters;
+    protected $GET_params;
+    protected $POST_params;
     
     function __construct($url, $controller_name, $http_code = 200) {
         $this->url = $url;
         $this->controller = Controller::getController($controller_name, $this);
         $this->http_code = $http_code;
-        $this->parameters = $_GET;
+        $this->GET_params = $_GET;
+        $this->POST_params = $_POST;
     }
     
     function getUrl() {
@@ -40,9 +42,18 @@ class Route {
         $this->http_code = $http_code;
     }
     
-    function getParameter($name){
-        if(isset($this->parameters[$name])){
-            return $this->parameters[$name];
+    function GET($name){
+        if(isset($this->GET_params[$name])){
+            return $this->GET_params[$name];
+        }
+        else{
+            return false;
+        }
+    }
+    
+    function POST($name){
+        if(isset($this->POST_params[$name])){
+            return $this->POST_params[$name];
         }
         else{
             return false;

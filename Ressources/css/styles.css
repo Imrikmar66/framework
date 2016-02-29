@@ -144,8 +144,23 @@
    color:    #fff;
 }
 html{
-    background-color: #ececec;
+    margin: 0px;
+    padding: 0px;
 }
 body{
-    background: #fff;
+    margin: 0px;
+    padding: 0px;
+}
+/* Login page */
+#container{
+    margin: 0 auto;
+    width: 1000px;
+    text-align: center;
+    margin-top: 10%;
+}
+#login-form{
+
+}
+#login-form input{
+
 }

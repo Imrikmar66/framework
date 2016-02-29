@@ -27,7 +27,11 @@ abstract class Controller {
     }
     
     protected function GET($name){
-        return $this->route->getParameter($name);
+        return $this->route->GET($name);
+    }
+    
+    protected function POST($name){
+        return $this->route->POST($name);
     }
     
     abstract protected function defineMainView();
