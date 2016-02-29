@@ -26,8 +26,8 @@ class RouteParameter {
         $this->filter = $filter;
     }
     
-    function test(){
-        return preg_match('/'.$this->filter.'/', $this->name);
+    function test($value){
+        return preg_match('/'.$this->filter.'/', $value);
     }
     
 }

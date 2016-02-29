@@ -73,6 +73,26 @@ class Route {
         array_push($this->routeParameters, new RouteParameter($str, $filter));
     }
     
+    function using($name, $filter){
+        if($param = $this->getParameterByName($name)){
+            $param->setFilter($filter);
+            return $this;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    function getParameterByName($name){
+        foreach($this->routeParameters as $parameter){
+            if(gettype($parameter) != "object")
+                continue;
+            if($parameter->getName() == $name)
+                return $parameter;
+        }
+        return false;
+    }
+    
     function addGET($param){
         array_push($this->GET_params ,$param);
         return $this;
@@ -126,27 +146,23 @@ class Route {
         }
     }
     
-    protected function compareRouteParameters($routeParameters){
-        devAff($routeParameters);
-        devAff($this->routeParameters);
+    protected function compareRouteParametersToUrl($routeParameters){
+
         if(count($routeParameters) != count($this->routeParameters))
             return  false;
         
         foreach($this->routeParameters as $key => $param){
-            if(gettype($param) == "string" && gettype($routeParameters[$key]) == "string"){echo "p1";
-                if ($param != $routeParameters[$key]){echo 'p1bis';
-                    return false;
-                }
-            }
-            else if(gettype($param) == "object" && gettype($routeParameters[$key]) == "object"){echo "p2";
-                if(!$routeParameters[$key]->test())
+            if(gettype($param) == "string" && gettype($routeParameters[$key]) == "string"){
+                if ($param != $routeParameters[$key])
                     return false;
             }
-            else{echo "p3";
+            else if(gettype($param) == "object"){
+                if(!$param->test($routeParameters[$key]))
+                    return false;
+            }
+            else
                 return false;
-            }
         }
-        echo "true";
         return true;
     }
     
@@ -164,12 +180,12 @@ class Route {
             return false;
         
         foreach(self::$routes as $route){
-            $route->compareRouteParameters(Route::parseRoute($_GET['route']));
-            echo '------------------------------------------------------------------------';
-            echo '<br />';
-            echo '------------------------------------------------------------------------';
+            
+            if(!isset($_GET['route']))
+                continue;
+            
             //check url
-            if($route->getUrl() != $_GET['route'])
+            if(!$route->compareRouteParametersToUrl(Route::parseCurrentUrl()))
                 continue;
             //check method
             if($route->getType() != $_SERVER['REQUEST_METHOD'])
@@ -203,8 +219,8 @@ class Route {
         return false;
     }
     
-    public static function parseRoute($route){
-        $parsed = explode('/', $route);
+    public static function parseCurrentUrl(){
+        $parsed = explode('/', $_GET['route']);
         $routeParameters = array();
         foreach($parsed as $str){
             if(strstr($str, '@') !== FALSE){
