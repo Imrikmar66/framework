@@ -10,6 +10,7 @@ class Route {
     protected $type;
     protected $GET_params;
     protected $POST_params;
+    protected $routeParameters = array();
     
     function __construct($type, $url, $controller_name, $http_code = 200, $GET = array(), $POST = array()) {
         $this->url = $url;
@@ -18,6 +19,8 @@ class Route {
         $this->type = $type;
         $this->GET_params = $GET;
         $this->POST_params = $POST;
+        
+        $this->parseUrl();
     }
     
     function getUrl() {
@@ -66,13 +69,17 @@ class Route {
         return $this;
     }
     
-    function addGET($name, $test = ''){
-        array_push($this->GET_params, new RouteParameter($name, $test));
+    function setParam($param, $filter = ''){
+        array_push($this->routeParameters, new RouteParameter($str, $filter));
+    }
+    
+    function addGET($param){
+        array_push($this->GET_params ,$param);
         return $this;
     }
     
-    function addPOST($name, $test = ''){
-        array_push($this->POST_params, new RouteParameter($name, $test));
+    function addPOST($param){
+        array_push($this->POST_params ,$param);
         return $this;
     }
     
@@ -107,6 +114,42 @@ class Route {
             http_response_code($this->http_code);
     }
     
+    protected function parseUrl(){
+        $parsed = explode('/', $this->url);
+        foreach($parsed as $str){
+            if(strstr($str, '@') !== FALSE){
+                array_push($this->routeParameters, new RouteParameter($str));
+            }
+            else{
+                array_push($this->routeParameters, $str);
+            }
+        }
+    }
+    
+    protected function compareRouteParameters($routeParameters){
+        devAff($routeParameters);
+        devAff($this->routeParameters);
+        if(count($routeParameters) != count($this->routeParameters))
+            return  false;
+        
+        foreach($this->routeParameters as $key => $param){
+            if(gettype($param) == "string" && gettype($routeParameters[$key]) == "string"){echo "p1";
+                if ($param != $routeParameters[$key]){echo 'p1bis';
+                    return false;
+                }
+            }
+            else if(gettype($param) == "object" && gettype($routeParameters[$key]) == "object"){echo "p2";
+                if(!$routeParameters[$key]->test())
+                    return false;
+            }
+            else{echo "p3";
+                return false;
+            }
+        }
+        echo "true";
+        return true;
+    }
+    
     /* --- Statics --- */
     
     public static function addRoute($type, $url, $controller_name, $http_code = 200){
@@ -121,6 +164,10 @@ class Route {
             return false;
         
         foreach(self::$routes as $route){
+            $route->compareRouteParameters(Route::parseRoute($_GET['route']));
+            echo '------------------------------------------------------------------------';
+            echo '<br />';
+            echo '------------------------------------------------------------------------';
             //check url
             if($route->getUrl() != $_GET['route'])
                 continue;
@@ -133,13 +180,13 @@ class Route {
             //check needed parameters
             $allNeededParams = true;
             foreach($route->getGET_params() as $getParam){
-                if(!array_key_exists($getParam->getName(), $_GET)){
+                if(!array_key_exists($getParam, $_GET)){
                     $allNeededParams = false;
                     break;
                 }     
             }
             foreach($route->getPOST_params() as $postParam){
-                if(!array_key_exists($postParam->getName(), $_POST)){
+                if(!array_key_exists($postParam, $_POST)){
                     $allNeededParams = false;
                     break;
                 }     
@@ -154,6 +201,21 @@ class Route {
         }
         
         return false;
+    }
+    
+    public static function parseRoute($route){
+        $parsed = explode('/', $route);
+        $routeParameters = array();
+        foreach($parsed as $str){
+            if(strstr($str, '@') !== FALSE){
+                array_push($routeParameters, new RouteParameter($str));
+            }
+            else{
+                array_push($routeParameters, $str);
+            }
+        }
+
+        return $routeParameters;
     }
     
 }
