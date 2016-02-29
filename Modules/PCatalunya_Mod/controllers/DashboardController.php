@@ -1,11 +1,6 @@
 <?php
 
 class DashboardController extends Controller {
-   
-    function __construct() {
-        $this->mainView = "dashboard";
-        parent::__construct();
-    }
     
     function errorLoadingController() {
         $this->mainView = "index";
@@ -15,4 +10,8 @@ class DashboardController extends Controller {
         return true;
     }
     
+    protected function defineMainView() {
+        $this->mainView = "dashboard";
+    }
+
 }
