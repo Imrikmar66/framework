@@ -5,19 +5,23 @@ abstract class Controller {
     protected $mainView = "";
     protected $tpl_vars = array();
     protected $html;
-    protected $route;
+    protected $GET_params;
+    protected $POST_params;
+    protected $responseType;
+    protected $responseCode;
     
-    function __construct($route) {
-        $this->route = $route;
+    function __construct() {
+        $this->GET_params = $_GET;
+        $this->POST_params = $_POST;
+        $this->responseType = $_SERVER['REQUEST_METHOD'];
+        $this->responseCode = http_response_code();
+        
         $this->defineMainView();
         if($this->authenticationRequirement()){
             if(Authentication::isAuthentified())
                 return true;
             else
                 $this->errorLoadingController("Not authentified");
-        }
-        if( $this->route->is404()){
-            $ct->set404();
         }
     }
     
@@ -27,27 +31,37 @@ abstract class Controller {
     }
     
     protected function GET($name){
-        return $this->route->GET($name);
+        if(isset($this->GET_params[$name])){
+            return $this->GET_params[$name];
+        }
+        else{
+            return false;
+        }
     }
     
     protected function POST($name){
-        return $this->route->POST($name);
+        if(isset($this->POST_params[$name])){
+            return $this->POST_params[$name];
+        }
+        else{
+            return false;
+        }
     }
     
     protected function isGET(){
-        return $this->route->getType() == 'GET' ? true : false;
+        return $this->responseType == 'GET' ? true : false;
     }
     
     protected function isPOST(){
-        return $this->route->getType() == 'POST' ? true : false;
+        return $this->responseType == 'POST' ? true : false;
     }
     
     protected function isPUT(){
-        return $this->route->getType() == 'PUT' ? true : false;
+        return $this->responseType == 'PUT' ? true : false;
     }
     
     protected function isDELETE(){
-        return $this->route->getType() == 'DELETE' ? true : false;
+        return $this->responseType == 'DELETE' ? true : false;
     }
     
     abstract protected function defineMainView();
@@ -74,14 +88,10 @@ abstract class Controller {
         echo $this->html;
     }
     
-    public function set404(){
-        $this->mainView = '404';
-    }
-    
     /* --- static ---- */
-    public static function getController($name, $route){
+    public static function getController($name){
         $controller = ucfirst($name)."Controller";
-        return new $controller($route);
+        return new $controller();
     }
     
 }

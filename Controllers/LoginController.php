@@ -4,7 +4,13 @@ class LoginController extends Controller {
     
     
     public function main(){
-        $this->tpl_vars["form_login"] = $this->makeBaseLoginForm();
+        
+        if($this->isGET()){
+            $this->tpl_vars["form_login"] = $this->makeBaseLoginForm();
+        }
+        else if($this->isPOST()){
+            $this->tpl_vars["form_login"] = "connected";
+        }
         parent::main();
     }
     
