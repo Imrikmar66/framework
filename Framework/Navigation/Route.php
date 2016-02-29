@@ -76,6 +76,14 @@ class Route {
         return $this;
     }
     
+    function getGET_params(){
+        return $this->GET_params;
+    }
+    
+    function getPOST_params(){
+        return $this->POST_params;
+    }
+    
     function GET($name){
         if(isset($this->GET_params[$name])){
             return $this->GET_params[$name];
@@ -119,9 +127,25 @@ class Route {
                 if($route->getType() == $_SERVER['REQUEST_METHOD']){
                     //check response type
                     if($route->getHttp_code() == http_response_code()){
-                        if($send_headers_now)
-                            $route->sendHeaders();
-                        return $route;
+                        //check needed parameters
+                        $allNeededParams = true;
+                        foreach($route->getGET_params() as $getParam){
+                            if(!array_key_exists($getParam, $_GET)){
+                                $allNeededParams = false;
+                                break;
+                            }     
+                        }
+                        foreach($route->getPOST_params() as $postParam){
+                            if(!array_key_exists($postParam, $_POST)){
+                                $allNeededParams = false;
+                                break;
+                            }     
+                        }
+                        if($allNeededParams){
+                            if($send_headers_now)
+                                $route->sendHeaders();
+                            return $route;
+                        }
                     }
                 }
             }

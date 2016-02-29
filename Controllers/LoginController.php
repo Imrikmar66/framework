@@ -9,7 +9,7 @@ class LoginController extends Controller {
             $this->tpl_vars["form_login"] = $this->makeBaseLoginForm();
         }
         else if($this->isPOST()){
-            $this->tpl_vars["form_login"] = "connected";
+            $user = User::getUserByEmail($this->POST("username"));
         }
         parent::main();
     }
