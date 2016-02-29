@@ -7,13 +7,15 @@ class Route {
     protected $url;
     protected $controller;
     protected $http_code;
+    protected $type;
     protected $GET_params;
     protected $POST_params;
     
-    function __construct($url, $controller_name, $http_code = 200) {
+    function __construct($url, $controller_name, $type = 'GET', $http_code = 200) {
         $this->url = $url;
         $this->controller = Controller::getController($controller_name, $this);
         $this->http_code = $http_code;
+        $this->type = $type;
         $this->GET_params = $_GET;
         $this->POST_params = $_POST;
     }
@@ -29,17 +31,29 @@ class Route {
     function getHttp_code() {
         return $this->http_code;
     }
+    
+    function getType(){
+        return $this->type;
+    }
 
     function setUrl($url) {
         $this->url = $url;
+        return $this;
     }
 
     function setController($controller) {
         $this->controller = $controller;
+        return $this;
     }
 
     function setHttp_code($http_code) {
         $this->http_code = $http_code;
+        return $this;
+    }
+    
+    function setType($type){
+        $this->type = $type;
+        return $this;
     }
     
     function GET($name){
@@ -74,14 +88,16 @@ class Route {
     
     /* --- Statics --- */
     
-    public static function addRoute($url, $controller_name, $http_code = 200){
-       $newRoute = new Route($url, $controller_name, $http_code);
+    public static function addRoute($url, $controller_name, $type = 'GET', $http_code = 200){
+       $newRoute = new Route($url, $controller_name, $type, $http_code);
        array_push(self::$routes, $newRoute);
+       return self::$routes[max(array_keys(self::$routes))];
     }
     
     public static function getRoute($url, $send_headers_now = true){
+        $requestType = $_SERVER['REQUEST_METHOD'];
         foreach(self::$routes as $route){
-            if($route->getUrl() == $url){
+            if($route->getUrl() == $url && $route->getType() == $requestType){
                 if($send_headers_now)
                     $route->sendHeaders();
                 return $route;
