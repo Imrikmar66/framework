@@ -5,7 +5,6 @@ if($route = Route::getRoute()){
     $ct->main();
 }
 else{
-    $route = 
     $ct = new Controller404();
     $ct->main();
 }
