@@ -21,10 +21,6 @@ abstract class Controller {
         return URI_TEMPLATE.'/'.$viewName.'.tpl';
     }
     
-    protected function set404(){
-        $this->mainView = '404';
-    }
-    
     abstract protected function defineMainView();
     abstract protected function authenticationRequirement();
     abstract protected function errorLoadingController();
@@ -47,6 +43,10 @@ abstract class Controller {
        
         $this->loadView($view);
         echo $this->html;
+    }
+    
+    public function set404(){
+        $this->mainView = '404';
     }
     
     /* --- static ---- */

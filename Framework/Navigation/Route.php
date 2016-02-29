@@ -38,6 +38,13 @@ class Route {
         $this->http_code = $http_code;
     }
     
+    function is404(){
+        if($this->http_code == 404)
+            return true;
+        else
+            return false;
+    }
+    
     function sendHeaders(){
         if(!headers_sent())
             http_response_code($this->http_code);
