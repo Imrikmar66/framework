@@ -1,4 +1,4 @@
 RewriteEngine On
 #RewriteRule ^((?!Pages/).*)$ http://localhost:8888/PlanetCatalunya/Pages/$1 [L,NC]
-RewriteRule ^([^\.]+)$ http://localhost:8888/PlanetCatalunya/index.php?R=$1 [L,NC]
+RewriteRule ^([^\.]+)$ http://localhost:8888/PlanetCatalunya/index.php?route=$1 [QSA,L]
 ErrorDocument 404 http://localhost:8888/PlanetCatalunya/index.php

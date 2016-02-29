@@ -5,6 +5,6 @@
         <title></title>
     </head>
     <body>
-        Log in page
+        login page
     </body>
 </html>
