@@ -5,6 +5,7 @@ if(MODE_DEV == TRUE){
     ini_set('display_errors', 1);
     require_once URI_SETTINGS.'/debug_functions.php';
 }
+
 session_start();
 
 require_once URI_FRAMEWORK.'/Autoloader.php';
