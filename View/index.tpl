@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        Hello smarty
-    </body>
-</html>
+{include file="./common/header.tpl" title="home"}
+    Hello smarty
+{include file="./common/footer.tpl"}

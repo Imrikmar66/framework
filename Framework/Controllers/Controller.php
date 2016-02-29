@@ -5,8 +5,10 @@ abstract class Controller {
     protected $mainView = "";
     protected $tpl_vars = array();
     protected $html;
+    protected $route;
     
-    function __construct() {
+    function __construct($route) {
+        $this->route = $route;
         $this->defineMainView();
         if($this->authenticationRequirement()){
             if(Authentication::isAuthentified())
@@ -14,11 +16,18 @@ abstract class Controller {
             else
                 $this->errorLoadingController("Not authentified");
         }
+        if( $this->route->is404()){
+            $ct->set404();
+        }
     }
     
     /* ---- Protected ---- */
     protected function getView($viewName){
         return URI_TEMPLATE.'/'.$viewName.'.tpl';
+    }
+    
+    protected function GET($name){
+        return $this->route->getParameter($name);
     }
     
     abstract protected function defineMainView();
@@ -50,9 +59,9 @@ abstract class Controller {
     }
     
     /* --- static ---- */
-    public static function getController($name){
+    public static function getController($name, $route){
         $controller = ucfirst($name)."Controller";
-        return new $controller();
+        return new $controller($route);
     }
     
 }

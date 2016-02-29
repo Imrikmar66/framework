@@ -7,11 +7,13 @@ class Route {
     protected $url;
     protected $controller;
     protected $http_code;
+    protected $parameters;
     
     function __construct($url, $controller_name, $http_code = 200) {
         $this->url = $url;
-        $this->controller = Controller::getController($controller_name);
+        $this->controller = Controller::getController($controller_name, $this);
         $this->http_code = $http_code;
+        $this->parameters = $_GET;
     }
     
     function getUrl() {
@@ -36,6 +38,15 @@ class Route {
 
     function setHttp_code($http_code) {
         $this->http_code = $http_code;
+    }
+    
+    function getParameter($name){
+        if(isset($this->parameters[$name])){
+            return $this->parameters[$name];
+        }
+        else{
+            return false;
+        }
     }
     
     function is404(){

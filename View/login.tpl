@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        login page
-    </body>
-</html>
+{include file="./common/header.tpl" title="login"}
+<h1>Login page</h1>
+{include file="./common/footer.tpl"}
