@@ -18,9 +18,7 @@ abstract class Controller {
         
         $this->defineMainView();
         if($this->authenticationRequirement()){
-            if(Authentication::isAuthentified())
-                return true;
-            else
+            if(!Authentication::isAuthentified())
                 $this->errorLoadingController("Not authentified");
         }
     }

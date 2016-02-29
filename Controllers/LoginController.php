@@ -20,8 +20,10 @@ class LoginController extends Controller {
                 Authentication::validAuth($token, array());
                 Navigation::navigateTo('dashboard');
             }
-            else
+            else{
+                Authentication::refuseAuth ();
                 $form_login = "failed";
+            }
         }
 
         parent::main();

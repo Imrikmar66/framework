@@ -5,12 +5,12 @@ if(MODE_DEV == TRUE){
     ini_set('display_errors', 1);
     require_once URI_SETTINGS.'/debug_functions.php';
 }
+session_start();
 
 require_once URI_FRAMEWORK.'/Autoloader.php';
 require_once URI_SETTINGS.'/functions.php';
 require_once URI_SETTINGS.'/smarty-master/libs/Smarty.class.php';
 require_once URI_SETTINGS.'/Routes.php';
-session_start();
 
 load_modules();
 

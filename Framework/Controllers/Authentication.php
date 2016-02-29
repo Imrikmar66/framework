@@ -15,7 +15,7 @@ class Authentication {
         if($token = self::getToken())
             return $token;
         else
-            return false;  
+            return false;
     }
     
     public static function validAuth($token, $parameters){
