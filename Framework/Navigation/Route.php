@@ -122,34 +122,37 @@ class Route {
         
         foreach(self::$routes as $route){
             //check url
-            if($route->getUrl() == $_GET['route']){
-                //check method
-                if($route->getType() == $_SERVER['REQUEST_METHOD']){
-                    //check response type
-                    if($route->getHttp_code() == http_response_code()){
-                        //check needed parameters
-                        $allNeededParams = true;
-                        foreach($route->getGET_params() as $getParam){
-                            if(!array_key_exists($getParam, $_GET)){
-                                $allNeededParams = false;
-                                break;
-                            }     
-                        }
-                        foreach($route->getPOST_params() as $postParam){
-                            if(!array_key_exists($postParam, $_POST)){
-                                $allNeededParams = false;
-                                break;
-                            }     
-                        }
-                        if($allNeededParams){
-                            if($send_headers_now)
-                                $route->sendHeaders();
-                            return $route;
-                        }
-                    }
-                }
+            if($route->getUrl() != $_GET['route'])
+                continue;
+            //check method
+            if($route->getType() != $_SERVER['REQUEST_METHOD'])
+                continue;
+            //check response type
+            if($route->getHttp_code() != http_response_code())
+                continue;
+            //check needed parameters
+            $allNeededParams = true;
+            foreach($route->getGET_params() as $getParam){
+                if(!array_key_exists($getParam, $_GET)){
+                    $allNeededParams = false;
+                    break;
+                }     
             }
+            foreach($route->getPOST_params() as $postParam){
+                if(!array_key_exists($postParam, $_POST)){
+                    $allNeededParams = false;
+                    break;
+                }     
+            }
+            if(!$allNeededParams)
+                continue;
+            
+            if($send_headers_now)
+                $route->sendHeaders();
+            
+            return $route;
         }
+        
         return false;
     }
     
