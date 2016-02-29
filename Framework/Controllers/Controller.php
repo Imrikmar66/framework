@@ -34,6 +34,22 @@ abstract class Controller {
         return $this->route->POST($name);
     }
     
+    protected function isGET(){
+        return $this->route->getType() == 'GET' ? true : false;
+    }
+    
+    protected function isPOST(){
+        return $this->route->getType() == 'POST' ? true : false;
+    }
+    
+    protected function isPUT(){
+        return $this->route->getType() == 'PUT' ? true : false;
+    }
+    
+    protected function isDELETE(){
+        return $this->route->getType() == 'DELETE' ? true : false;
+    }
+    
     abstract protected function defineMainView();
     abstract protected function authenticationRequirement();
     abstract protected function errorLoadingController();
