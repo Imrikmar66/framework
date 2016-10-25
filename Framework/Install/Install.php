@@ -7,7 +7,7 @@ class Install {
         $mods = Tools::remove_dots(scandir(URI_MOD));
 
         foreach($mods as $mod){
-            $mod_files = remove_dots(scandir(URI_MOD.'/'.$mod));
+            $mod_files = Tools::remove_dots(scandir(URI_MOD.'/'.$mod));
             foreach($mod_files as $file){ 
                 if(preg_match("(.php)", $file)){
                     require_once URI_MOD.'/'.$mod.'/'.$file;
