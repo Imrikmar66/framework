@@ -6,3 +6,4 @@ Route::addRoute('GET', 'my/route/@id', 'MyController')
     ->addGET('hello')
     ->addGET('world');
 */
+Route::addRoute('GET', '/', 'Default');
