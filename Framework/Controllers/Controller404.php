@@ -14,4 +14,8 @@ class Controller404  extends Controller{
         return;
     }
     
+    protected function initModule(){
+        return false;
+    }
+    
 }

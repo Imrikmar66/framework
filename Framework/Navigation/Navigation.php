@@ -6,12 +6,12 @@ define('NAVIGATION_CONNEXION', 'index.php');
 class Navigation {
     
     public static function navigateTo($location){
-        header('Location: '.$location);
+        header('Location: '.URL_FOLDER.'/'.$location);
         exit();
     }
     
     public static function navigateWithErrorCodeTo($location, $errorCode){
-        header('Location: '.$location.'?error_statut='.$errorCode);
+        header('Location: '.URL_FOLDER.'/'.$location.'?error_statut='.$errorCode);
         exit();
     }
     

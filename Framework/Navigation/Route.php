@@ -6,15 +6,18 @@ class Route {
     
     protected $url;
     protected $controller;
+    protected $controller_name;
     protected $http_code;
     protected $type;
     protected $GET_params;
     protected $POST_params;
     protected $routeParameters = array();
     
-    function __construct($type, $url, $controller_name, $http_code = 200, $GET = array(), $POST = array()) {
+    function __construct($type, $url, $controller_name, $http_code = 200, $setController = true, $GET = array(), $POST = array()) {
         $this->url = $url;
-        $this->controller = Controller::getController($controller_name, $this);
+        $this->controller_name = $controller_name;
+        if($setController)
+            $this->controller = Controller::getController($controller_name);
         $this->http_code = $http_code;
         $this->type = $type;
         $this->GET_params = $GET;
@@ -44,8 +47,13 @@ class Route {
         return $this;
     }
 
-    function setController($controller) {
-        $this->controller = $controller;
+    function setController($controller = null) {
+        if($controller != null){
+            $this->controller = $controller;
+        }
+        else{
+            $this->controller = Controller::getController($this->controller_name);
+        }
         return $this;
     }
 
@@ -57,6 +65,14 @@ class Route {
     function setType($type){
         $this->type = $type;
         return $this;
+    }
+    
+    function getRouteParameters() {
+        return $this->routeParameters;
+    }
+
+    function setRouteParameters($routeParameters) {
+        $this->routeParameters = $routeParameters;
     }
     
     function setGET($params){
@@ -129,15 +145,10 @@ class Route {
         }
     }
     
-    function sendHeaders(){
-        if(!headers_sent())
-            http_response_code($this->http_code);
-    }
-    
     protected function parseUrl(){
         $parsed = explode('/', $this->url);
         foreach($parsed as $str){
-            if(strstr($str, '@') !== FALSE){
+            if(strpos($str, '@') === 0){
                 array_push($this->routeParameters, new RouteParameter($str));
             }
             else{
@@ -169,7 +180,7 @@ class Route {
     /* --- Statics --- */
     
     public static function addRoute($type, $url, $controller_name, $http_code = 200){
-       $newRoute = new Route($type, $url, $controller_name, $http_code);
+       $newRoute = new Route($type, $url, $controller_name, $http_code, false);
        array_push(self::$routes, $newRoute);
        return self::$routes[max(array_keys(self::$routes))];
     }
@@ -195,12 +206,25 @@ class Route {
                 continue;
             //check needed parameters
             $allNeededParams = true;
+            
             foreach($route->getGET_params() as $getParam){
                 if(!array_key_exists($getParam, $_GET)){
                     $allNeededParams = false;
                     break;
                 }     
             }
+            
+             /* Angular http fix */
+            if($requestType == "POST"){
+                foreach($_POST as $key => $value){
+                    $json_key = json_decode($key);
+                    if(json_last_error() == JSON_ERROR_NONE){
+                        $_POST = json_decode(file_get_contents("php://input"), true);
+                    }
+                };
+            }
+            /* - */
+            
             foreach($route->getPOST_params() as $postParam){
                 if(!array_key_exists($postParam, $_POST)){
                     $allNeededParams = false;
@@ -210,9 +234,11 @@ class Route {
             if(!$allNeededParams)
                 continue;
             
-            if($send_headers_now)
-                $route->sendHeaders();
-            
+            //Added with controllername variable for loading controller only if needed
+            $route->setController();
+            //give all routes parameters to controller
+            $route->getController()->setRouteParameters($route->getRouteParameters());
+
             return $route;
         }
         
@@ -223,7 +249,7 @@ class Route {
         $parsed = explode('/', $_GET['route']);
         $routeParameters = array();
         foreach($parsed as $str){
-            if(strstr($str, '@') !== FALSE){
+            if(strpos($str, '@') === 0){
                 array_push($routeParameters, new RouteParameter($str));
             }
             else{

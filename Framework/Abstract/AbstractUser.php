@@ -10,144 +10,92 @@ abstract class AbstractUser extends ObjectModel {
     /* --- public --- */
     
     /* --- protected --- */
-    protected $id; //Int
-    protected $email; //varchar 255
-    protected $password; //varchar 255
     
-    protected $description = 
-        array(
+    protected function getBddDescription(){
+        return array(
             'table' => 'Users',
-            'id' => array(
-                'type' => 'i',
-                'columnName' => 'id'
-            ),
-            'email' => array(
-                'type' => 's',
-                'columnName' => 'email'
-            ),
-            'password' => array(
-                'type' => 's',
-                'columnName' => 'password'
+            'parameters' => array(
+                'username' => 'email',
+                'password' => 'password'
             )
         );
-    /* --- private --- */
-    
-    /* --- constructor --- */
-    function __construct($id = 0) {
-        parent::__construct($id);
     }
+    /* --- private --- */
+    protected $username;
+    protected $password;
+    private $authToken;
+    private $rememberToken;
     
     /* ---------- getter / setter ---------- */
-    
-    function getId() {
-        return $this->id;
+
+    function getUsername() {
+        return $this->username;
     }
 
-    function getEmail() {
-        return $this->email;
-    }
-    
     function getPassword() {
         return $this->password;
     }
-    
-    function getType() {
-        return $this->type;
-    }
-    
-    function setEmail($email) {
-        $this->email = utf8_decode($email);
+
+    function setUsername($username) {
+        $this->username = $username;
     }
 
     function setPassword($password) {
+        $this->password = $password;
+    }
+    
+    function setPasswordEncode($password){
         $this->password = md5($password);
     }
-
-    function setType($type) {
-        $this->type = $type;
+    
+    function getAuthToken() {
+        return $this->token;
+    }
+    
+    function setAuthToken(){
+        $this->token = Authentication::createAuthToken($this->id);
+    }
+    
+    function getRememberToken() {
+        return $this->rememberToken;
     }
 
+    function setRememberToken() {
+        $this->rememberToken = md5(HASH_ADDITIONAL_VALUE.$this->id.$this->username.rand());
+    }
         
     /* ---------- public method ---------- */
     
-    public function create($parameters = null){
-        
-        if($parameters == null){
-            $parameters = array(
-                "AI_arg" => true, 
-                "args" => array('email', 'password')
-            );
-        }
-        parent::create($parameters);
+    public function create($array=false) {
+        parent::create($array);
     }
     
-    public function update($parameters = null){
-        
-        if($parameters == null){
-            $parameters = array(
-                "args" => array('email', 'password'),
-                "condition" => array('id' => $this->id)
-            );
-        }
-        
-        parent::update($parameters);
+    public function read($array=false) {
+        parent::read($array);
     }
-    
-    public function remove($parameters = null){
-        
-        $parameters = array(
-                "condition" => array('id')
-        );
-        
-        parent::remove($parameters);
-    }
-    
-    public function getUserById($id, $parameters = null){
-        
-        if($parameters == null){
-            $parameters = array(
-                "args" => array('email', 'password'),
-                "condition" => array('id' => $id)
-            );
-        }
-        
-        $results = $this->select($parameters);
 
-        if(!empty($results)){
-            $this->id = $id;
-            $this->email = $results[0]['email'];
-            $this->password = $results[0]['password'];
-            return $results;
-        }
-        else{
-            return false;
-        }
+    public function update($array=false) {
+        parent::update($array);
     }
     
-    public function getUserByEmail($email, $params = null){
-        $params = array(
-            "request" => "SELECT id, password FROM Users WHERE email=?",
-            "input" => array(
-                "type" => "s",
-                "args" => array(
-                    $email
-                )
-            ),
-            "output" => array(
-                "id" => &$id,
-                "password" => &$password
-            )
+    public function delete($array=false) {
+        parent::delete($array);
+    }
+    
+    public function getUserByUsername($parameters = null){
+        $this->read(
+            [
+                'data' => '*',
+                'condition' => [
+                    'username'
+                ]
+            ]
         );
-        $results = Bdd::parseRequestResults(Bdd::requestWithParams($params), $params);
-        if(!empty($results)){
-            $this->id = $results[0]['id'];
-            $this->email = $email;
-            $this->password = $results[0]['password'];
+
+        if($this->id)
             return true;
-        }
-        else{
+        else
             return false;
-        }
     }
     
     public function checkAuth($password){
@@ -161,40 +109,53 @@ abstract class AbstractUser extends ObjectModel {
         
     }
     
-    public static function checkForAlreadyUsedParams($params){
-         
-        $params = array(
-           "request" => "SELECT id FROM Users WHERE ".$params['table']." = ?",
-           "input" => array(
-               "type" => $params['type'],
-               "args" => array(
-                   $params['arg']
-               )
-           ),
-            "output" => array(
-                "id" => &$id
-            )
-        );
-        $result = Bdd::requestWithParams($params);
-        if(isset($result[0]['id'])){
+    public function checkCryptedAuth($password){
+        
+        if($password == $this->password){
             return true;
         }
-        else{
+        else {
             return false;
         }
+        
+    }
+    
+    public static function checkForAlreadyUsedParam($param){
+        $user = new User();
+        $method = 'set'.ucfirst($param);
+            if(method_exists($this, $method)){
+                $user->$method($email);
+            }
+            else{
+                throw new Exception("Setter ".$method." does not exist for class ".get_class($this));
+            }
+
+        $user->read([
+            'datas' => 'id',
+            'condition' => $param
+        ]);
+        
+        if($user->getId())
+            return true;
+        else
+            return false;
+        
     }
     
     public static function checkForAlreadyUsedMail($email){
-        return User::checkForAlreadyUsedParams(array(
-            'table' => 'email',
-            'type'  => 's', 
-            'arg'   => $email
-        ));
+        $user = new User();
+        $user->setUsername($email);
+        $user->getUserByUsername();
+        
+        if($user->getId())
+            return true;
+        else
+            return false;
     }
     
     public function createRememberCookie(){
-        $token = $this->rememberMe();
-        setcookie(REMEMBER_COOKIE_NAME, $this->id."|".$token, time()+31556926);
+        if($this->rememberMe())
+            setcookie(REMEMBER_COOKIE_NAME, $this->id."|".$this->token, time()+31556926);
     }
     
     public function  checkRememberMeSession(){
@@ -206,76 +167,53 @@ abstract class AbstractUser extends ObjectModel {
             return false;
         }
         
-        $params = array(
-           "request" => "SELECT token FROM User_rmbrme_info WHERE user_id=?",
-           "input" => array(
-               "type" => "i",
-               "args" => array(
-                   $this->id
-                )
-           ),
-            "output" => array(
-                "token" => &$token
-            )
+        $bdd = Bdd::getBdd();
+        $bddToken = $bdd->get('User_rmbrme_info', 'token',
+            [
+                'user_id' => $this->id 
+            ]
         );
-        $result = Bdd::parseRequestResults(Bdd::requestWithParams($params), $params);
         
-        if(isset($result[0]['token']) && $id == $this->id &&  $token == $result[0]['token']){
+        if(isset($token) && $id == $this->id && $bddToken == $token)
             return true;
-        }
-        else{
+        else
             return false;
-        }
-        
-    }
-    
-    public function createAuthToken(){
-        return hash('sha256', HASH_ADDITIONAL_VALUE."http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"].$_SERVER['HTTP_USER_AGENT']).time()."-".$this->id;;
     }
     
     /* ---------- protected method ---------- */
     
-    protected function getObjectById($id) {
-        $this->getUserById($id);
-    }
-    
-    protected function createRememberMeToken(){
-        return md5(HASH_ADDITIONAL_VALUE.$this->id.$this->email.rand());
-    }
-    
     protected function rememberMe(){
         
-        $token = $this->createRememberMeToken();
+        $this->setRememberToken();
         
-        
-        $params_a = array(
-           "request" => "DELETE FROM User_rmbrme_info WHERE user_id=?",
-           "input" => array(
-               "type" => "i",
-               "args" => array(
-                   $this->id
-               )
-           )
-        );
-        $params_b = array(
-           "request" => "INSERT INTO User_rmbrme_info VALUES ('', ?, ?)",
-           "input" => array(
-               "type" => "is",
-               "args" => array(
-                   $this->id,
-                   $token
-               )
-           )
+        $bdd = Bdd::getBdd();
+        $params_a = $bdd->delete('User_rmbrme_info',
+            [
+                'AND' => [
+                    'user_id' => $this->id 
+                ]
+            ]
         );
         
-        if( Bdd::requestWithParams($params_a)
-            && Bdd::requestWithParams($params_b)){
-            return $token;
+        $params_b = $bdd->insert('User_rmbrme_info',
+            [
+                'user_id' => $this->id,
+                'token' => $this->token
+            ]
+        );
+        
+        if($params_a){
+            if($params_b)
+                return true;
+            else{
+                trigger_error("Error adding user token to database");
+                return false;
+            }
         }
         else{
+            trigger_error("Error deleting user token in database");
             return false;
         }
-         
     }
     
     /* ---------- static method ---------- */
@@ -289,29 +227,26 @@ abstract class AbstractUser extends ObjectModel {
         $_SESSION['User'] = $currentUser;
     }
     
-    public static function getAllUser($params = null){
-        
-        $params = array(
-            "request" => "SELECT * FROM Users",
-            "output" => array(
-                "id" =>&$id,
-                "email" => &$mail,
-                "password" => &$password
-            )
-        );
-        
-        $responses = Bdd::requestWithParams($params);
-        $Users = array();
-        foreach($responses as $response){
-            $User = new User();
-            $User->id = $response['id'];
-            $User->email = $response['email'];
-            $User->password = $response['password'];
-            array_push($Users, $User);
+    public static function getAllUser($params = null){    
+        return ObjectModel::getAllObjectFromClass(get_class($this));  
+    }
+    
+    public static function logIn($username, $password){
+        $User = new User();
+        $User->setUsername($username);
+        if($User->getUserByUsername()){
+            if($User->checkAuth($password)){
+                $User->setAuthToken();
+                $User->createRememberCookie();
+                return $User;
+            }
+            else{
+                return false;
+            }
         }
-        
-        return $Users;
-        
+        else{
+            return false;
+        }
     }
     
     public static function getTokenFromCookie(){
@@ -348,27 +283,10 @@ abstract class AbstractUser extends ObjectModel {
         
     }
     
-    public static function logIn($email, $password){
-        $User = new User();
-        if($User->getUserByEmail($email)){
-            if($User->checkAuth($password)){
-                $User->createRememberCookie();
-                return $User;
-            }
-            else{
-                return false;
-            }
-        }
-        else{
-            return false;
-        }
-    }
-    
     public static function getOldSession(){
         
         if($userId = User::getUserIdFromCookie()){
-            $user = new User();
-            $user->getUserById($userId);
+            $user = new User($userId);
 
             if($user->checkRememberMeSession()){
                 return $user;

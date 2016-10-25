@@ -2,6 +2,13 @@
 
 function Appli_autoload($className) { 
     
+    if(Context::getModule()){
+        if(file_exists(URI_MOD.'/'.Context::getModule().'/class/'.$className . '.php')){
+            include URI_MOD.'/'.Context::getModule().'/class/'.$className . '.php';
+            return true;
+        }
+    }
+        
     //Overwritten classes
     $class_rewrite_folders = scandir(URI_OVERRIDES);
     foreach($class_rewrite_folders as $folder){
@@ -25,6 +32,15 @@ function Appli_autoload($className) {
     foreach($controllers_folders as $folder){
         if (file_exists(URI_CONTROLLERS.'/'.$folder.'/'.$className . '.php')) { 
             require_once URI_CONTROLLERS.'/'.$folder.'/'.$className . '.php'; 
+            return true; 
+        } 
+    }
+    
+    //Ajax classes
+    $ajax_folders = scandir(URI_AJAX);
+    foreach($ajax_folders as $folder){
+        if (file_exists(URI_AJAX.'/'.$folder.'/'.$className . '.php')) { 
+            require_once URI_AJAX.'/'.$folder.'/'.$className . '.php'; 
             return true; 
         } 
     }

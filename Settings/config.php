@@ -6,10 +6,12 @@ define('MODE_DEV', TRUE);
 define('BDD_HOST', 'localhost');
 define('BDD_USER', 'root');
 define('BDD_PASS', 'root');
-define('BDD_NAME', 'Planet_Catalunya');
+define('BDD_NAME', 'SIMPLE_API');
+define('BDD_TYPE', 'mysql');
+define('BDD_CHARSET', 'utf8');
 
 /* Info */
-define('APP_NAME', "PlanetCatalunya");
+define('APP_NAME', "SIMPLE_API");
 
 /* URI */
 define('URL_SERVOR', "http://$_SERVER[HTTP_HOST]");
@@ -18,6 +20,7 @@ define('URL_PAGES', URL_FOLDER."/Pages");
 define('URL_RESSOURCES', URL_PAGES."/Ressources");
 define('URL_INCLUDES', URL_PAGES."/Includes");
 define('URL_FRAMEWORK', URL_FOLDER."/Framework");
+define('URL_MOD', URL_FOLDER.'/Modules');
 
 define('URI_FOLDER', dirname(dirname(__FILE__)));
 define('URI_FRAMEWORK', URI_FOLDER.'/Framework');
@@ -26,6 +29,7 @@ define('URI_TEMPLATE', URI_FOLDER.'/View');
 define('URI_OVERRIDES', URI_FOLDER.'/Overrides');
 define('URI_CONTROLLERS', URI_FOLDER.'/Controllers');
 define('URI_SETTINGS', URI_FOLDER.'/Settings');
+define('URI_AJAX', URI_FOLDER.'/AjaxManagement');
 
 /* ERROR CODE */
 

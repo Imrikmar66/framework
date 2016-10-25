@@ -3,17 +3,16 @@ require_once 'config.php';
 if(MODE_DEV == TRUE){ 
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    require_once URI_SETTINGS.'/debug_functions.php';
+    require_once URI_FOLDER.'/Debug/Debug_lib.php';
 }
 
-session_start();
-
+require_once URI_FRAMEWORK.'/Context.php';
 require_once URI_FRAMEWORK.'/Autoloader.php';
-require_once URI_SETTINGS.'/functions.php';
+session_start();
 require_once URI_SETTINGS.'/smarty-master/libs/Smarty.class.php';
-require_once URI_SETTINGS.'/Routes.php';
+require_once URI_SETTINGS.'/routes.php';
 
-load_modules();
+Install::load_modules();
 
-ACTION('backend_header');
+Install::ACTION('backend_header');
 ?>

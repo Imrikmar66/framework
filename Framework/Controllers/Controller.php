@@ -9,23 +9,31 @@ abstract class Controller {
     protected $POST_params;
     protected $responseType;
     protected $responseCode;
+    protected $responseContentType;
     
     function __construct() {
         $this->GET_params = $_GET;
         $this->POST_params = $_POST;
         $this->responseType = $_SERVER['REQUEST_METHOD'];
-        $this->responseCode = http_response_code();
+        $this->responseCode = $this->initResponseCode();
+        $this->responseContentType = $this->initResponseContentType();
+
+        $this->initModule();
         
         $this->defineMainView();
-        if($this->authenticationRequirement()){
-            if(!Authentication::isAuthentified())
-                $this->errorLoadingController("Not authentified");
-        }
+        
     }
     
     /* ---- Protected ---- */
     protected function getView($viewName){
-        return URI_TEMPLATE.'/'.$viewName.'.tpl';
+        //Get view from module caller
+        $reflector = new ReflectionClass(get_class($this));
+        $path = dirname(dirname($reflector->getFileName()));
+        $view =  $path.'/view/'.$viewName.'.tpl';
+        if(file_exists($view))
+            return $view;
+        else
+            return URI_TEMPLATE.'/'.$viewName.'.tpl';
     }
     
     protected function GET($name){
@@ -62,12 +70,76 @@ abstract class Controller {
         return $this->responseType == 'DELETE' ? true : false;
     }
     
+    protected function initResponseCode(){
+        return 200;
+    }
+    
+    protected function initResponseContentType(){
+        return "text/html";
+    }
+    
+    protected function setResponseCode($code){
+        $this->responseCode = $code;
+    }
+    
+    protected function setResponseContentType($contentType){
+        $this->responseContentType = $contentType;
+    }
+    
+    public function setRouteParameters($params){
+        $parsed = explode('/', $_GET['route']);
+        foreach($params as $key => $param){
+            if(gettype($param) == 'object'){
+                $name = $param->getName();
+                $this->$name = $parsed[$key];
+            }
+        }
+    }
+    
+    protected function getRouteParam($name){
+        if(isset($this->$name))
+            return $this->$name;
+        else
+            return false;
+    }
+    
+    protected function tplVar($name, $value){
+        $this->tpl_vars[$name] = $value;
+    }
+    
+    protected function arrTplVar($array){
+        $this->tpl_vars = array_merge($this->tpl_vars, $array);
+    }
+    
+    protected function sendHeaders(){
+        if(!headers_sent()){
+            http_response_code($this->responseCode);
+            header("Content-Type: ".$this->responseContentType);
+        }
+    }
+    
+    //Autoload classes of controller module - rewrite for custom classes loading
+    protected function initModule(){
+        $reflector = new ReflectionClass(get_class($this));
+        $path = dirname(dirname($reflector->getFileName()));
+        Context::loadClassesFromModule($path);
+    }
+    
     abstract protected function defineMainView();
     abstract protected function authenticationRequirement();
     abstract protected function errorLoadingController();
 
     /* ---- Public ---- */
+    public function beforeMain(){
+        if($this->authenticationRequirement()){
+            if(!Authentication::isAuthentified()){
+                $this->errorLoadingController();}
+        }
+        //send headers response
+        $this->sendHeaders();
+    }
     public function main(){
+        //display mainView
         $this->displayView();
     }
     
@@ -89,7 +161,18 @@ abstract class Controller {
     /* --- static ---- */
     public static function getController($name){
         $controller = ucfirst($name)."Controller";
-        return new $controller();
+        if(class_exists($controller)){
+            return new $controller();
+        }
+        else{
+            if(MODE_DEV){    
+                throw new Exception("Controller ".$controller." does not exist");
+            }
+            else{
+                return new Controller404();
+            }
+        }
     }
+    
     
 }
