@@ -11,7 +11,7 @@ class DefaultController extends Controller {
     }
 
     protected function errorLoadingController() {
-        
+        $this->mainView = '404';
     }
 
     public function main() {

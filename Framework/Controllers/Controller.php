@@ -122,7 +122,8 @@ abstract class Controller {
     protected function initModule(){
         $reflector = new ReflectionClass(get_class($this));
         $path = dirname(dirname($reflector->getFileName()));
-        Context::loadClassesFromModule($path);
+        if(strpos($path, 'Modules') !== FALSE)
+            Context::loadClassesFromModule($path);
     }
     
     abstract protected function defineMainView();

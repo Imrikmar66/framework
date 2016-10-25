@@ -8,7 +8,7 @@ if($route = Route::getRoute()){
 else if(rtrim("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]", '/') == URL_FOLDER){
     Navigation::navigateTo('login');
 }
-else{
+else{ 
     $ct = new Controller404();
     $ct->beforeMain();
     $ct->main();
