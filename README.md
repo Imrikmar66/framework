@@ -11,7 +11,7 @@ define('BDD_PASS', 'root');
 define('BDD_NAME', 'SIMPLE_API');
 
 //your main folder on servor (if different of servor root folder)
-define('URL_FOLDER', URL_SERVOR.'/PlanetCatalunya');
+define('URL_FOLDER', URL_SERVOR.'/MyFolder');
 ```
 You can also activate debug mode by setting MODE_DEV to true
 ```php
