@@ -140,6 +140,14 @@ abstract class Controller {
         $this->sendHeaders();
     }
     public function main(){
+        //send globals uri for internal loadings
+        $this->arrTplVar(
+            array(
+                'URL_RESSOURCES' => URL_RESSOURCES,
+                'URL_FOLDER' => URL_FOLDER
+            )
+        );
+        
         //display mainView
         $this->displayView();
     }
