@@ -80,10 +80,17 @@ abstract class ObjectModel {
     //Argument can be set as array of data
     protected function create($array = false){
         
+        if($array == false){
+            $datas = $this->getDataArray();
+        }
+        else{
+            $datas = optionsArrayConvertKey($array);
+        }
+        
         $bdd = Bdd::getBdd();
         $insert_id = $bdd->insert(
             $this->getTable(),
-            $this->getDataArray($array)
+            $datas
         );
 
         $this->setId($insert_id);
