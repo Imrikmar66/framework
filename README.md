@@ -46,6 +46,7 @@ You can add a new module by adding a folder structure in `Modules` folder like t
         - class
         - controllers
         - view
+
 ### Controllers
 
 You can create controllers in `Controllers` folder or in `Modules/MYMODULE/controllers` folder. Controllers have to be named with `Controller` suffix, are called without this suffix in routes, have the same php file name and extends the class `Controller` : 
