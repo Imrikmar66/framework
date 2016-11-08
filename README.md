@@ -25,6 +25,10 @@ Route::addRoute('RequestType', 'my/route', 'ControllerName');
 ```
 RequestType : GET, POST, PUT, DELETE
 
+You can call a specific method by this way:
+```php
+Route::addRoute('RequestType', 'my/route', 'ControllerName::myMethod');
+```
 Route can use parameters : 
 ```php
 Route::addRoute('GET', 'my/users/@id', 'User');
@@ -145,9 +149,3 @@ Views can be set in `View` folder or `Modules/MYMODULE/view`. Templates are base
     Hello {$user}
 {include file="./common/footer.tpl"}
 ```
-
-
-
-
-
-
