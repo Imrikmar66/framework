@@ -3,7 +3,7 @@ require_once 'Settings/header.php';
 if($route = Route::getRoute()){
     $ct = $route->getController();
     $ct->beforeMain();
-    $ct->main();
+    $ct->callMain();
 }
 else if(rtrim("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]", '/') == URL_FOLDER){
     Navigation::navigateTo('login');

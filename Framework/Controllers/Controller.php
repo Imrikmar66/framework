@@ -10,6 +10,7 @@ abstract class Controller {
     protected $responseType;
     protected $responseCode;
     protected $responseContentType;
+    protected $main;
     
     function __construct() {
         $this->GET_params = $_GET;
@@ -131,6 +132,10 @@ abstract class Controller {
     abstract protected function errorLoadingController();
 
     /* ---- Public ---- */
+    public function callMain(){
+        $main = $this->main;
+        $this->$main();
+    }
     public function beforeMain(){
         if($this->authenticationRequirement()){
             if(!Authentication::isAuthentified()){
@@ -169,9 +174,32 @@ abstract class Controller {
     
     /* --- static ---- */
     public static function getController($name){
-        $controller = ucfirst($name)."Controller";
+        $controller_parts = explode('::', $name);
+        if(count($controller_parts) > 2){
+            throw new Exception("Incorrect number of function defined in controller ".$name);
+            return;
+        }
+        else if(count($controller_parts) > 1){
+            $controller_call = $controller_parts[1];
+        }
+        else{
+            $controller_call = "main";
+        }
+        $controller_name = $controller_parts[0];
+        
+        
+        $controller = ucfirst($controller_name)."Controller";
         if(class_exists($controller)){
-            return new $controller();
+            $the_controller = new $controller();
+            if(method_exists($the_controller, $controller_call))
+                $the_controller->main = $controller_call;
+            else{
+                $the_controller->main = "main";
+                if(MODE_DEV){
+                    trigger_error("Method ".$controller_call." does not exist in controller ".$controller.". Method is replaced by main() method");
+                }
+            }
+            return $the_controller;
         }
         else{
             if(MODE_DEV){    

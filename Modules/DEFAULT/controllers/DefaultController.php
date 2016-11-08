@@ -14,7 +14,7 @@ class DefaultController extends Controller {
         $this->mainView = '404';
     }
 
-    public function main() {
+    public function abs() {
         parent::main();
     }
     
