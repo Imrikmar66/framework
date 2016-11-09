@@ -17,9 +17,18 @@ You can also activate debug mode by setting MODE_DEV to true
 ```php
 define('MODE_DEV', TRUE);
 ```
+### Modules
+You can add a new module by adding a folder structure in `Modules` folder like this : 
+- Modules
+    - MYMODULE
+        - class
+        - controllers
+        - view
+        - routes.php
+
 ### Routes
 
-Same folder `Settings` contain the `routes` file. You can define routes in this file with static method 
+You can create routes in the `Settings/routes.php` or `Modules/MYMODULE/routes.php` files. You can define routes in this file with static method 
 ```php 
 Route::addRoute('RequestType', 'my/route', 'ControllerName');
 ```
@@ -43,13 +52,6 @@ Route::addRoute('POST', 'add/user', 'User')
     ->addGET('username')
     ->addPOST('password');
 ```
-### Modules
-You can add a new module by adding a folder structure in `Modules` folder like this : 
-- Modules
-    - MYMODULE
-        - class
-        - controllers
-        - view
 
 ### Controllers
 
