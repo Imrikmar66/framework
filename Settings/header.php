@@ -11,10 +11,10 @@ require_once URI_FRAMEWORK.'/Autoloader.php';
 session_start();
 require_once URI_SETTINGS.'/smarty-master/libs/Smarty.class.php';
 require_once URI_SETTINGS.'/routes.php';
-foreach(scandir(URI_MOD) as $mod){
+foreach(scandir(URI_MOD) as $mod){ 
     if(strpos($mod, '.') === FALSE){
-        if(file_exists(URI_MOD.'/routes.php'))
-            require_once URI_MOD.'/routes.php';
+        if(file_exists(URI_MOD.'/'.$mod.'/routes.php'))
+            require_once URI_MOD.'/'.$mod.'/routes.php';
     }
 }
 

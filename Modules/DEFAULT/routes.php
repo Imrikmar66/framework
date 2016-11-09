@@ -1,3 +1,2 @@
 <?php
-
-Route::addRoute('GET', 'user', 'Default::abs');
+Route::addRoute('GET', 'default', 'Default::abs');
