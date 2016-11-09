@@ -2,6 +2,9 @@
 /* Dev mode*/
 define('MODE_DEV', TRUE);
 
+/* Security*/
+define('HASH_ADDITIONAL_VALUE', '3a8rty74hj');
+
 /* Database */
 define('BDD_HOST', 'localhost');
 define('BDD_USER', 'root');
