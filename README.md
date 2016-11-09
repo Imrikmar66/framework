@@ -121,12 +121,20 @@ class MyUser extends ObjectModel{
     function getPassword() {
         return $this->password;
     }
+    
+    function setUsername($username) {
+        $this->username = $username;
+    }
+
+    function setPassword($password) {
+        $this->password = $password;
+    }
 }
 $user = new User();
 $user->setUsername('Me');
 $user->setPassword('Mypass');
 
-$user2 = new User(2); //Immediatly read the user in database at id=2
+$user2 = new User(2); //Immediatly read the user in database at id=2 (only for atribute where setter is defined)
 
 //CRUD in database
 $user->create(); 
