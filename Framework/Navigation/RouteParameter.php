@@ -5,7 +5,7 @@ class RouteParameter {
     protected $name;
     protected $filter;
     
-    function __construct($name, $filter = '[a-zA-z1-9]+') {
+    function __construct($name, $filter = '[a-zA-z0-9]+') {
         $this->name = $name;
         $this->filter = $filter;
     }
