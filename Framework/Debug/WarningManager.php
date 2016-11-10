@@ -23,7 +23,7 @@ class WarningManager {
     }
     
     public function throwWarning(){
-        trigger_error($this->text_error." : ".class_sender."->".$method_sender."()");
+        trigger_error($this->text_error." : ".$this->class_sender."->".$this->method_sender."()");
     }
     
 }

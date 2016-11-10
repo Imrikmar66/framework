@@ -23,7 +23,7 @@ class ErrorManager {
     }
     
     public function throwError(){
-        throw new Exception($this->text_error, $this->error_code, $class_sender."->".$method_sender."()");
+        throw new Exception($this->text_error, $this->error_code, $this->class_sender."->".$this->method_sender."()");
     }
     
 }

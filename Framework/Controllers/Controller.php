@@ -127,6 +127,24 @@ abstract class Controller {
             Context::loadClassesFromModule($path);
     }
     
+    protected function getModulePath() {
+        $reflector = new ReflectionClass(get_class($this));
+        $path = dirname(dirname($reflector->getFileName()));
+        if(strpos($path, 'Modules') !== FALSE)
+            return $path;
+        else
+            return false;
+    }
+    
+    protected function getModuleUrl() {
+        $reflector = new ReflectionClass(get_class($this));
+        $path = dirname(dirname($reflector->getFileName()));
+        if(strpos($path, 'Modules') !== FALSE)
+            return URL_MOD.'/'.basename($path);
+        else
+            return false;
+    }
+    
     abstract protected function defineMainView();
     abstract protected function authenticationRequirement();
     abstract protected function errorLoadingController();
@@ -146,10 +164,20 @@ abstract class Controller {
     }
     public function main(){
         //send globals uri for internal loadings
+        $assets = $this->getModulePath();
+        if($assets){
+            $assets .= '/assets';
+            if(file_exists($assets))
+                $assets = $this->getModuleUrl().'/assets';
+            else
+                $assets = URL_RESSOURCES;
+        }
+        else
+            $assets = URL_RESSOURCES;
+        
         $this->arrTplVar(
             array(
-                'URL_RESSOURCES' => URL_RESSOURCES,
-                'URL_FOLDER' => URL_FOLDER
+                'URL_ASSETS' => $assets
             )
         );
         
