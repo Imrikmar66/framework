@@ -66,3 +66,4 @@ function Appli_autoload($className) {
 } 
 
 spl_autoload_register('Appli_autoload');
+class_alias('RoutesManager', 'R');
