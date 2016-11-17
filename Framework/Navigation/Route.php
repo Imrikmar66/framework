@@ -102,7 +102,7 @@ class Route {
         }
     }
 
-    function as($alias){
+    function alias($alias){
         $this->alias = $alias;
     }
     
