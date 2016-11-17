@@ -2,13 +2,12 @@
 
 class Route {
     
-    static $routes = array();
-    
     protected $url;
     protected $controller;
     protected $controller_name;
     protected $http_code;
     protected $type;
+    protected $alias = 'DEFAULT';
     protected $GET_params;
     protected $POST_params;
     protected $routeParameters = array();
@@ -40,6 +39,10 @@ class Route {
     
     function getType(){
         return $this->type;
+    }
+
+    function getAlias(){
+        return $this->alias;
     }
 
     function setUrl($url) {
@@ -97,6 +100,10 @@ class Route {
         else{
             return false;
         }
+    }
+
+    function as($alias){
+        $this->alias = $alias;
     }
     
     function getParameterByName($name){
@@ -179,18 +186,12 @@ class Route {
     
     /* --- Statics --- */
     
-    public static function addRoute($type, $url, $controller_name, $http_code = 200){
-       $newRoute = new Route($type, $url, $controller_name, $http_code, false);
-       array_push(self::$routes, $newRoute);
-       return self::$routes[max(array_keys(self::$routes))];
-    }
-    
     public static function getRoute($send_headers_now = true){
         $requestType = $_SERVER['REQUEST_METHOD'];
         if(!isset($_GET['route']))
             return false;
         
-        foreach(self::$routes as $route){
+        foreach(RoutesManager::getRoutesManager()->getRoutes() as $route){
             
             if(!isset($_GET['route']))
                 continue;

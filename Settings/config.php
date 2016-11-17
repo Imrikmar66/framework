@@ -15,7 +15,8 @@ define('APP_NAME', "SIMPLE_API");
 
 /* URI */
 define('URL_SERVOR', "http://$_SERVER[HTTP_HOST]");
-define('URL_FOLDER', URL_SERVOR.'/distant-framework');
+//define('URL_FOLDER', URL_SERVOR.'/distant-framework');
+define('URL_FOLDER', URL_SERVOR.'/stagiaaaaire/GIT/framework');
 define('URL_RESSOURCES', URL_FOLDER."/Ressources");
 define('URL_FRAMEWORK', URL_FOLDER."/Framework");
 define('URL_MOD', URL_FOLDER.'/Modules');
