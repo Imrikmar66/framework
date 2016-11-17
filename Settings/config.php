@@ -13,6 +13,9 @@ define('BDD_CHARSET', 'utf8');
 /* Info */
 define('APP_NAME', "SIMPLE_API");
 
+/* Security*/		
+define('HASH_ADDITIONAL_VALUE', '3a8rty74hj');
+
 /* URI */
 define('URL_SERVOR', "http://$_SERVER[HTTP_HOST]");
 //define('URL_FOLDER', URL_SERVOR.'/distant-framework');
