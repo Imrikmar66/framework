@@ -30,8 +30,8 @@
 	    protected function execute(InputInterface $input, OutputInterface $output)
 	    {
 	    	echo "\n";
-	        $output->writeln('This command will create all the folders and files needed for your new module.');
-	        $response = readline("Module name (or q to quit):\n");
+	        $output->writeln('— This command will create all the folders and files needed for your new module.' . "\n");
+	        $response = readline("— Module name (or q to quit):\n> ");
 
 	        $responseControllerName = ucfirst(strtolower($response));
 
@@ -49,10 +49,83 @@
 	        mkdir($modulePath . '/assets');
 
 
+
+			// Ecriture dans le controller.php généré
+	        $handle_controller = fopen($modulePath . "/controllers/". $responseControllerName ."Controller.php", 'a');
+	        $skel_controller = $this->getControllerSkeleton($responseControllerName);
+	        fwrite($handle_controller, $skel_controller);
+	       
+	        $output->writeln("\n— $response folder has been created in Modules/ \n");
+
+	       	
+	       	/**
+	       	 * GÉNÉRATION ROUTES
+	       	 */
+
+	       	$skel_route = "<?php \n\n";
+
+	        $output->writeln('— Now we will register your module routes and contoller methods');
+	        $responseRoutePath = readline("— Route path: (or q to quit/save):\n> ");
+
+	        // Quitte si q
+	        if($responseRoutePath == '' || $responseRoutePath == 'o'){
+				fwrite($handle_controller, '}');
+				exit();
+	        }
+	        $handle_route = fopen($modulePath . '/routes.php', 'a');
+
+	
+	        // Sinon rentre dans la boucle
+	       	while($responseRoutePath != '' && $responseRoutePath != 'q'){
+
+	        	$responseRouteName = readline("— Route name:\n> ");
+	       		$responseRouteType = strtoupper(readline('— Route type: (default: GET)'));
+	       		$responseRouteType = $responseRouteType != '' ? $responseRouteType : 'GET';
+
+	        	// On ajoute un suffixe aux methodes controller selon leur type, pour éviter les doublons
+	        	$responseControllerMethod = $responseRouteName;
+	  			if($responseRouteType == 'POST'){
+	  				$responseControllerMethod .= 'Handle';
+	  			}
+	  			elseif($responseRouteType == 'GET'){
+	  				$responseControllerMethod .= 'Action';
+	  			}
+	
+				$skel_route .= "R::addRoute('$responseRouteType', '$responseRoutePath', '$responseControllerName::$responseControllerMethod')->alias('$responseRouteName');\n\n";
+
+				// Si route est GET, on lui génère une vue avec l'alias en nom
+				if($responseRouteType == 'GET'){
+					$skel_view = "<h1>Welcome to the $response $responseRouteName page !</h1>";
+					$handle_view = fopen($modulePath . '/view/' . $responseRouteName . '.tpl', 'w');
+					fwrite($handle_view, $skel_view);
+				}
+				
+				// On ecrit le debut de la methode dans le controller
+				$skel_method = "\n    public function $responseControllerMethod() {\n";
+
+				// Si la route affiche une vue, on l'appelle dans la methode controller ->
+				if($responseRouteType == 'GET'){
+					$skel_method .= '        $this->mainView' . " = '$responseRouteName'; \n";
+				}
+				$skel_method .= "        parent::main();\n";
+				$skel_method .= "    }\n\n";
+				// -> Fin ecriture methode controller
+
+				fwrite($handle_controller, $skel_method);
+
+				$responseRoutePath = readline("\n— Route path: (or q to quit/save):\n> ");
+	       	}
+			fwrite($handle_route, $skel_route);
+
+			fwrite($handle_controller, '}');
+
+	    }
+
+	    // Get the controller php skeleton
+	    private function getControllerSkeleton($name){
 	        // Squelette controller
 	        $skel_controller = '<?php
-
-class ' . $responseControllerName . 'Controller extends Controller {';
+class ' . $name . 'Controller extends Controller {';
 	        $skel_controller .= <<<'EOS'
 	            
 
@@ -73,69 +146,8 @@ class ' . $responseControllerName . 'Controller extends Controller {';
 	}
 
 EOS;
-			// Ecriture dans le controller.php généré
-	        $handle_controller = fopen($modulePath . "/controllers/". $responseControllerName ."Controller.php", 'a');
-	        fwrite($handle_controller, $skel_controller);
-	       
-	        $output->writeln("$response folder has been created in Modules/ \n");
-
-	       	
-	       	/**
-	       	 * GÉNÉRATION ROUTES
-	       	 */
-
-	       	$skel_route = "<?php \n\n";
-
-	        $output->writeln('Now we will register your module routes and contoller methods');
-	        $responseRoutePath = readline("Route path: (or q to quit/save):\n");
-
-	        // Quitte si q
-	        if($responseRoutePath == '' || $responseRoutePath == 'o'){
-				fwrite($handle_controller, '}');
-				exit();
-	        }
-	        $handle_route = fopen($modulePath . '/routes.php', 'a');
-
-	
-	        // Sinon rentre dans la boucle
-	       	while($responseRoutePath != '' && $responseRoutePath != 'q'){
-	        	$responseRouteName = readline("Route name:\n");
-	       		$responseRouteType = strtoupper(readline('Route type: (default: GET)'));
-	       		$responseRouteType = $responseRouteType != '' ? $responseRouteType : 'GET';
-
-	        	// On ajoute un suffixe aux methodes controller selon leur type, pour éviter les doublons
-	        	$responseControllerMethod = $responseRouteName;
-	  			if($responseRouteType == 'POST'){
-	  				$responseControllerMethod .= 'Handle';
-	  			}
-	  			elseif($responseRouteType == 'GET'){
-	  				$responseControllerMethod .= 'Action';
-	  			}
-	
-				$skel_route .= "R::addRoute('$responseRouteType', '$responseRoutePath', '$responseControllerName::$responseControllerMethod')->alias('$responseRouteName');\n\n";
-
-				if($responseRouteType == 'GET'){
-					$skel_view = "<h1>Welcome to the $response $responseRouteName page !</h1>";
-					$handle_view = fopen($modulePath . '/view/' . $responseRouteName . '.tpl', 'w');
-					fwrite($handle_view, $skel_view);
-				}
-	
-				$skel_method = "\n    public function $responseControllerMethod() {\n";
-
-				// Si la route affiche une vue, on l'écrit dans la methode controller
-				if($responseRouteType == 'GET'){
-					$skel_method .= '        $this->mainView' . " = '$responseRouteName'; \n";
-				}
-				$skel_method .= "        parent::main();\n";
-				$skel_method .= "    }\n\n";
-
-				fwrite($handle_controller, $skel_method);
-
-				$responseRoutePath = readline("Route path: (or q to quit/save):\n");
-	       	}
-			fwrite($handle_route, $skel_route);
-
-			fwrite($handle_controller, '}');
-
+			return $skel_controller;
 	    }
+
+
 	}
