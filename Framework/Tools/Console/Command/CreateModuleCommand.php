@@ -7,6 +7,16 @@
 
 	define('SAVE_PATH', 'Modules');
 
+/**
+
+	TODO:
+	- Ajouter la création de vue si GET
+	- Second todo item
+
+ */
+
+
+
 	class CreateModuleCommand extends Command
 	{
 	    protected function configure()
@@ -79,7 +89,6 @@ EOS;
 	        $output->writeln('Now we will register your module routes and contoller methods');
 	        $responseRoutePath = readline("Route path: (or q to quit/save):\n");
 
-	        $output->writeln($responseRoutePath);
 	        // Quitte si q
 	        if($responseRoutePath == '' || $responseRoutePath == 'o'){
 				fwrite($handle_controller, '}');
@@ -91,10 +100,32 @@ EOS;
 	        // Sinon rentre dans la boucle
 	       	while($responseRoutePath != '' && $responseRoutePath != 'q'){
 	        	$responseRouteName = readline("Route name:\n");
+	       		$responseRouteType = strtoupper(readline('Route type: (default: GET)'));
+	       		$responseRouteType = $responseRouteType != '' ? $responseRouteType : 'GET';
+
+	        	// On ajoute un suffixe aux methodes controller selon leur type, pour éviter les doublons
+	        	$responseControllerMethod = $responseRouteName;
+	  			if($responseRouteType == 'POST'){
+	  				$responseControllerMethod .= 'Handle';
+	  			}
+	  			elseif($responseRouteType == 'GET'){
+	  				$responseControllerMethod .= 'Action';
+	  			}
 	
-				$skel_route .= "R::addRoute('GET', '$responseRoutePath', '$responseControllerName::$responseRouteName')->alias('$responseRouteName');\n\n";
+				$skel_route .= "R::addRoute('$responseRouteType', '$responseRoutePath', '$responseControllerName::$responseControllerMethod')->alias('$responseRouteName');\n\n";
+
+				if($responseRouteType == 'GET'){
+					$skel_view = "<h1>Welcome to the $response $responseRouteName page !</h1>";
+					$handle_view = fopen($modulePath . '/view/' . $responseRouteName . '.tpl', 'w');
+					fwrite($handle_view, $skel_view);
+				}
 	
-				$skel_method = "\n    public function $responseRouteName() {\n";
+				$skel_method = "\n    public function $responseControllerMethod() {\n";
+
+				// Si la route affiche une vue, on l'écrit dans la methode controller
+				if($responseRouteType == 'GET'){
+					$skel_method .= '        $this->mainView' . " = '$responseRouteName'; \n";
+				}
 				$skel_method .= "        parent::main();\n";
 				$skel_method .= "    }\n\n";
 
