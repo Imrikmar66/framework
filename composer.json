@@ -1,9 +1,0 @@
-{
-    "require": {
-        "symfony/console": "^3.1",
-        "composer/installers": "^1.2"
-    },
-    "config": {
-        "vendor-dir": "External/vendor"
-    }
-}
