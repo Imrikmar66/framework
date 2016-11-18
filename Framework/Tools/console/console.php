@@ -1,5 +1,5 @@
 <?php
-require_once "vendor/autoload.php";
+require_once "External/vendor/autoload.php";
 require_once 'Command/CreateModuleCommand.php';
 
 use Symfony\Component\Console\Application;
