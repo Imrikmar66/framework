@@ -32,7 +32,7 @@
 	    	foreach ($arrConfig as $i => $configLine) {
 	    		// Quand on est sur la ligne qui précède les paramss bdd
 	    		if($configLine == '/* Database */' . "\n"){
-	    			if($arrConfig[($i - 1)] != "\n"){
+	    			if($arrConfig[($i + 1)][0] != "\n"){
 	    				$output->writeln("\n— Already installed, please check Settings/config.php if you want to modify more settings.\n");
 	    				return;
 	    			}
