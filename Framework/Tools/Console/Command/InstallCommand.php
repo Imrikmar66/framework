@@ -52,7 +52,7 @@
     			 	fwrite($handle_config, $dbParams);
 
 
-	    		 	$dbParams = $this->paramDatabase($responseHost, $responseUsername, $responseDatabaseName, $responseUsername, $responseType, $responseCharset);
+	    		 	$dbParams = $this->paramDatabase($responseHost, $responseDatabaseName, $responseUsername, $responsePassword, $responseType, $responseCharset);
 	    			// On rajoute les lignes de config à la suite du commentaire Database
 	    			$configLine .= $dbParams;
 	    			$arrConfig[$i] = $configLine;
@@ -72,9 +72,9 @@
 
 	    	$dbSetting = <<<EOS
 define('BDD_HOST', '$host');
-define('BDD_USER', '$database');
-define('BDD_PASS', '$user');
 define('BDD_NAME', '$database');
+define('BDD_USER', '$user');
+define('BDD_PASS', '$password');
 define('BDD_TYPE', '$type');
 define('BDD_CHARSET', '$charset');
 
