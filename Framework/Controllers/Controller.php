@@ -177,18 +177,12 @@ abstract class Controller {
         
         $this->arrTplVar(
             array(
-<<<<<<< c902085fae24ee937940c274da7e29caf76a9616
                 'URL_RESSOURCES' => URL_RESSOURCES,
                 'URL_FOLDER' => URL_FOLDER,
                 'Routes' => RoutesManager::getRoutesManager()
-<<<<<<< 957c21920cf0fdd3b2f609488bb847aa2f6b4935
                 'URL_ASSETS' => $assets
-=======
-
-=======
                 'URL_ASSETS' => $assets
->>>>>>> - Adding Controller::getModuleUrl, Controller::getModulePath
->>>>>>> no message
+                'URL_ASSETS' => $assets
             )
         );
         
