@@ -104,6 +104,7 @@ class Route {
 
     function alias($alias){
         $this->alias = $alias;
+        return $this;
     }
     
     function getParameterByName($name){
