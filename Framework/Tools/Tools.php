@@ -10,14 +10,5 @@ class Tools {
         }
         return $array;
     }
-    
-     public static function sortArray($array){
-        usort($array, "compare");
-        return $array;
-    }
-    
-    public static function compare($a, $b){
-        return strcmp($a->getName(), $b->getName());
-    }
 
 }

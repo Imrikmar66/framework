@@ -18,7 +18,5 @@ foreach(scandir(URI_MOD) as $mod){
     }
 }
 
-Install::load_modules();
-
-Install::ACTION('backend_header');
+Start::load_modules();
 ?>

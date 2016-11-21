@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Applications/MAMP/htdocs/distant-framework/Framework/Install/Install.php</file>
+            <file>file:/Applications/MAMP/htdocs/distant-framework/Settings/header.php</file>
+            <file>file:/Applications/MAMP/htdocs/distant-framework/Modules/new/routes.php</file>
+            <file>file:/Applications/MAMP/htdocs/distant-framework/Framework/Navigation/Route.php</file>
+            <file>file:/Applications/MAMP/htdocs/distant-framework/Settings/Routes.php</file>
+            <file>file:/Applications/MAMP/htdocs/distant-framework/.htaccess</file>
+            <file>file:/Applications/MAMP/htdocs/distant-framework/index.php</file>
+        </group>
     </open-files>
 </project-private>
