@@ -3,12 +3,6 @@
 define('MODE_DEV', TRUE);
 
 /* Database */
-define('BDD_HOST', 'localhost');
-define('BDD_USER', 'root');
-define('BDD_PASS', 'force_vente');
-define('BDD_NAME', 'root');
-define('BDD_TYPE', 'mysql');
-define('BDD_CHARSET', 'utf8');
 
 
 /* Info */
