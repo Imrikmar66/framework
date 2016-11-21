@@ -164,12 +164,23 @@ abstract class Controller {
     }
     public function main(){
         //send globals uri for internal loadings
+        $assets = $this->getModulePath();
+        if($assets){
+            $assets .= '/assets';
+            if(file_exists($assets))
+                $assets = $this->getModuleUrl().'/assets';
+            else
+                $assets = URL_RESSOURCES;
+        }
+        else
+            $assets = URL_RESSOURCES;
+        
         $this->arrTplVar(
             array(
                 'URL_RESSOURCES' => URL_RESSOURCES,
                 'URL_FOLDER' => URL_FOLDER,
                 'Routes' => RoutesManager::getRoutesManager()
-
+                'URL_ASSETS' => $assets
             )
         );
         

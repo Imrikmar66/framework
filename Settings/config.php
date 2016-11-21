@@ -5,10 +5,11 @@ define('MODE_DEV', TRUE);
 /* Database */
 define('BDD_HOST', 'localhost');
 define('BDD_USER', 'root');
-define('BDD_PASS', 'root');
-define('BDD_NAME', 'SIMPLE_API');
+define('BDD_PASS', 'force_vente');
+define('BDD_NAME', 'root');
 define('BDD_TYPE', 'mysql');
 define('BDD_CHARSET', 'utf8');
+
 
 /* Info */
 define('APP_NAME', "SIMPLE_API");
@@ -52,4 +53,3 @@ define('SUCCESS_CODE_UPDATED_INFO', 4);
 define('SUCCESS_CODE_SENDED_MAIL', 5);
 define('SUCCESS_CODE_USER_CREATED', 6);
 define('SUCCESS_CODE_USER_CREATED_WAIT', 7);
-?>

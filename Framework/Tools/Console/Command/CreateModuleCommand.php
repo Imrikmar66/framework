@@ -121,9 +121,10 @@
 
 	    }
 
-	    // Get the controller php skeleton
+	    /**
+	     * Get the controller skeleton
+	     */ 
 	    private function getControllerSkeleton($name){
-	        // Squelette controller
 	        $skel_controller = '<?php
 class ' . $name . 'Controller extends Controller {';
 	        $skel_controller .= <<<'EOS'
