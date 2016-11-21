@@ -179,7 +179,7 @@ abstract class Controller {
             array(
                 'URL_RESSOURCES' => URL_RESSOURCES,
                 'URL_FOLDER' => URL_FOLDER,
-                'Routes' => RoutesManager::getRoutesManager()
+                'Routes' => RoutesManager::getRoutesManager(),
                 'URL_ASSETS' => $assets
             )
         );
