@@ -18,7 +18,16 @@ You can also activate debug mode by setting MODE_DEV to true
 define('MODE_DEV', TRUE);
 ```
 ### Modules
-You can add a new module by adding a folder structure in `Modules` folder like this : 
+You can add a new module by using console in root folder from terminal...
+(if your php PATH is not in /usr/bin, you can use the second one)
+````cmd
+./console create:module
+````
+```
+php console create:module
+```
+
+... or by adding a folder structure in `Modules` folder like this : 
 - Modules
     - MYMODULE
         - class
@@ -30,25 +39,30 @@ You can add a new module by adding a folder structure in `Modules` folder like t
 
 You can create routes in the `Settings/routes.php` or `Modules/MYMODULE/routes.php` files. You can define routes in this file with static method 
 ```php 
-Route::addRoute('RequestType', 'my/route', 'ControllerName');
+R::addRoute('RequestType', 'my/route', 'ControllerName');
 ```
 RequestType : GET, POST, PUT, DELETE
-
+R::addRoute('RequestType', 'my/route', 'ControllerName::myMethod')
 You can call a specific method by this way:
 ```php
 Route::addRoute('RequestType', 'my/route', 'ControllerName::myMethod');
 ```
+For an alias association, you can do :
+```php
+R::addRoute('RequestType', 'my/route', 'ControllerName::myMethod')
+        ->alias('myroute')
+```
 Route can use parameters : 
 ```php
-Route::addRoute('GET', 'my/users/@id', 'User');
+R::addRoute('GET', 'my/users/@id', 'User');
 ```
 with regex :
 ```php
-Route::addRoute('GET', 'my/users/@id', 'User')->using('@id', [1-9]+);
+R::addRoute('GET', 'my/users/@id', 'User')->using('@id', [1-9]+);
 ```
 you can also add GET or POST parameters :
 ```php
-Route::addRoute('POST', 'add/user', 'User')
+R::addRoute('POST', 'add/user', 'User')
     ->addGET('username')
     ->addPOST('password');
 ```
