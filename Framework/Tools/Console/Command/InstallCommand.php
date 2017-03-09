@@ -40,13 +40,13 @@
 
     			 	$output->writeln('— First, we\'ll need your database credentials' . "\n");
 
-    			 	$responseHost 			= readline('— Database host: (localhost) (or q to quit)' . "\n> ");
+    			 	$responseHost 			= $this->askQuestion(' Database host: (localhost) (or q to quit)' . "\n> ");
     			 	if($responseHost == 'q'){ return; }
-    			 	$responseDatabaseName 	= readline('— Database name:' . "\n> ");
-    			 	$responseUsername 		= readline('— Database username:' . "\n> ");
-    			 	$responsePassword 		= readline('— Database password:' . "\n> ");
-    			 	$responseType 			= readline('— Database type: (mysql)' . "\n> ");
-    			 	$responseCharset 		= readline('— Database charset: (charset)' . "\n> ");
+    			 	$responseDatabaseName 	= $this->askQuestion(' Database name:', '', $input, $output);
+    			 	$responseUsername 		= $this->askQuestion(' Database username:', '', $input, $output);
+    			 	$responsePassword 		= $this->askQuestion(' Database password:', '', $input, $output);
+    			 	$responseType 			= $this->askQuestion(' Database type (mysql):', '', $input, $output);
+    			 	$responseCharset 		= $this->askQuestion(' Database charset (charset):', '', $input, $output);
 
     			 	$handle_config = fopen('Settings/config.php', 'c');
     			 	fwrite($handle_config, $dbParams);
@@ -81,4 +81,11 @@ define('BDD_CHARSET', '$charset');
 EOS;
 	    	return $dbSetting;
 	    }
+
+		private function askQuestion($q, $default, $input, $output){
+			$helper = $this->getHelper('question');
+			$question = new Question($q, $default);
+			$response = $helper->ask($input, $output, $question);
+			return $response;
+		}
 	}

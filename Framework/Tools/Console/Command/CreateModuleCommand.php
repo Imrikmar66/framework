@@ -4,6 +4,7 @@
 	use Symfony\Component\Console\Command\Command;
 	use Symfony\Component\Console\Input\InputInterface;
 	use Symfony\Component\Console\Output\OutputInterface;
+	use Symfony\Component\Console\Question\Question;
 
 	define('SAVE_PATH', 'Modules');
 
@@ -31,7 +32,8 @@
 	    {
 	    	echo "\n";
 	        $output->writeln('— This command will create all the folders and files needed for your new module.' . "\n");
-	        $response = readline("— Module name (or q to quit):\n> ");
+
+			$response = $this->askQuestion('Module name (or q to quit):', 'DefaultModule', $input, $output);
 
 	        $responseControllerName = ucfirst(strtolower($response));
 
@@ -65,7 +67,7 @@
 	       	$skel_route = "<?php \n\n";
 
 	        $output->writeln('— Now we will register your module routes and contoller methods');
-	        $responseRoutePath = readline("— Route path: (or q to quit/save):\n> ");
+			$responseRoutePath = $this->askQuestion('Route path: (or q to quit/save):', '', $input, $output);
 
 	        // Quitte si q
 	        if($responseRoutePath == '' || $responseRoutePath == 'o'){
@@ -78,8 +80,8 @@
 	        // Sinon rentre dans la boucle
 	       	while($responseRoutePath != '' && $responseRoutePath != 'q'){
 
-	        	$responseRouteName = readline("— Route name:\n> ");
-	       		$responseRouteType = strtoupper(readline('— Route type: (default: GET)'));
+				$responseRouteName = $this->askQuestion('Route name:', '/home', $input, $output);
+	       		$responseRouteType = strtoupper($this->askQuestion('Route type: (default: GET)', 'GET', $input, $output));
 	       		$responseRouteType = $responseRouteType != '' ? $responseRouteType : 'GET';
 
 	        	// On ajoute un suffixe aux methodes controller selon leur type, pour éviter les doublons
@@ -113,7 +115,7 @@
 
 				fwrite($handle_controller, $skel_method);
 
-				$responseRoutePath = readline("\n— Route path: (or q to quit/save):\n> ");
+				$responseRoutePath = $this->askQuestion('\n Route path: (or q to quit/save): ', '', $input, $output);
 	       	}
 			fwrite($handle_route, $skel_route);
 
@@ -150,5 +152,11 @@ EOS;
 			return $skel_controller;
 	    }
 
+	private function askQuestion($q, $default, $input, $output){
+		$helper = $this->getHelper('question');
+		$question = new Question($q, $default);
+		$response = $helper->ask($input, $output, $question);
+		return $response;
+	}
 
 	}
