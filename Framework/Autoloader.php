@@ -60,6 +60,27 @@ function Appli_autoload($className) {
             require_once URI_MOD.'/'.$folder.'/controllers/'.$className . '.php'; 
             return true;
         }
+
+        // Classes in a Modules/???/class/ subfolder
+        else if(is_dir(URI_MOD.'/'.$folder . '/class/') && $folder != '.' && $folder != '..') {
+            $mods_subfolders = scandir(URI_MOD.'/'.$folder.'/class/');
+            foreach ($mods_subfolders as $subfolder) {
+                if(file_exists(URI_MOD.'/'.$folder.'/class/' . $subfolder . '/' .$className . '.php')){
+                    require_once URI_MOD.'/'.$folder.'/class/' . $subfolder . '/' .$className . '.php';
+                    return true;
+                }
+                // 2deep4u
+                elseif(is_dir(URI_MOD.'/'.$folder . '/class/' . $subfolder) && $subfolder != '.' && $subfolder != '..'){
+                    $mods_sub_subfolders = scandir(URI_MOD.'/'.$folder . '/class/' . $subfolder);
+                    foreach ($mods_sub_subfolders as $sub_subfolder) {
+                        if(file_exists(URI_MOD.'/'.$folder.'/class/' . $subfolder . '/' . $sub_subfolder . '/' . $className . '.php')){
+                            require_once URI_MOD.'/'.$folder.'/class/' . $subfolder . '/' . $sub_subfolder . '/' . $className . '.php';
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     return false; 
