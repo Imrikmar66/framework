@@ -4,7 +4,7 @@
 	use Symfony\Component\Console\Command\Command;
 	use Symfony\Component\Console\Input\InputInterface;
 	use Symfony\Component\Console\Output\OutputInterface;
-	use Symfony\Component\Console\Question\ChoiceQuestion;
+	use Symfony\Component\Console\Question\Question;
 
 	/**
 	
@@ -31,22 +31,22 @@
 
 	    	foreach ($arrConfig as $i => $configLine) {
 	    		// Quand on est sur la ligne qui précède les paramss bdd
-	    		if($configLine == '/* Database */' . "\n"){
-	    			if($arrConfig[($i + 1)][0] != "\n"){
-	    				$output->writeln("\n— Already installed, please check Settings/config.php if you want to modify more settings.\n");
+	    		if($configLine == '/* Database */'."\r\n"){
+	    			if(strlen($arrConfig[($i + 1)]) > 5){
+	    				$output->writeln("\n Already installed, please check Settings/config.php if you want to modify more settings.\n");
 	    				return;
 	    			}
-    			 	$output->writeln("\n" . '— This will help you configure the framework to your needs' . "\n");
+    			 	$output->writeln("\n" . ' This will help you configure the framework to your needs' . "\n");
 
-    			 	$output->writeln('— First, we\'ll need your database credentials' . "\n");
+    			 	$output->writeln(' First, we\'ll need your database credentials' . "\n");
 
-    			 	$responseHost 			= $this->askQuestion(' Database host: (localhost) (or q to quit)' . "\n> ");
+    			 	$responseHost 			= $this->askQuestion(' Database host: (localhost) (or q to quit)', 'localhost', $input, $output);
     			 	if($responseHost == 'q'){ return; }
     			 	$responseDatabaseName 	= $this->askQuestion(' Database name:', '', $input, $output);
-    			 	$responseUsername 		= $this->askQuestion(' Database username:', '', $input, $output);
-    			 	$responsePassword 		= $this->askQuestion(' Database password:', '', $input, $output);
-    			 	$responseType 			= $this->askQuestion(' Database type (mysql):', '', $input, $output);
-    			 	$responseCharset 		= $this->askQuestion(' Database charset (charset):', '', $input, $output);
+    			 	$responseUsername 		= $this->askQuestion(' Database username (root):', 'root', $input, $output);
+    			 	$responsePassword 		= $this->askQuestion(' Database password (root):', 'root', $input, $output);
+    			 	$responseType 			= $this->askQuestion(' Database type (mysql):', 'mysql', $input, $output);
+    			 	$responseCharset 		= $this->askQuestion(' Database charset (charset):', 'charset', $input, $output);
 
     			 	$handle_config = fopen('Settings/config.php', 'c');
     			 	fwrite($handle_config, $dbParams);
@@ -57,11 +57,12 @@
 	    			$configLine .= $dbParams;
 	    			$arrConfig[$i] = $configLine;
 	    			// exit(); // ??
+
+
 	    		}
 	    	}
 
-	    	fwrite($handle_config, implode('', $arrConfig));
-
+	    	fwrite($handle_config, implode('', $arrConfig));		
 	    }
 
 	    protected function paramDatabase($host, $database, $user, $password, $type, $charset)

@@ -1,8 +1,6 @@
 <?php
-define('HASH_ADDITIONAL_VALUE', '3a8rty74hj');
-define('REMEMBER_COOKIE_NAME', APP_NAME.'_UserInfo');
 
-abstract class AbstractUser extends ObjectModel {
+abstract class AbstractUser extends ObjectModel implements JsonSerializable {
     
     /* --- static --- */
     protected static $currentUser;
@@ -12,20 +10,28 @@ abstract class AbstractUser extends ObjectModel {
     /* --- protected --- */
     
     protected function getBddDescription(){
-        return array(
+        return [
             'table' => 'Users',
-            'parameters' => array(
+            'parameters' => [
                 'username' => 'email',
-                'password' => 'password'
-            )
-        );
+                'password' => 'password',
+                'role' => 'role_id'
+            ]
+        ];
     }
+
     /* --- private --- */
     protected $username;
     protected $password;
+    protected $role;
     private $authToken;
-    private $rememberToken;
     
+    /* ------ constructor ------ */
+
+    function __construct($id = 0){
+        parent::__construct($id);
+    }
+
     /* ---------- getter / setter ---------- */
 
     function getUsername() {
@@ -35,6 +41,10 @@ abstract class AbstractUser extends ObjectModel {
     function getPassword() {
         return $this->password;
     }
+    
+    function getRole(){
+        return $this->role;
+    }
 
     function setUsername($username) {
         $this->username = $username;
@@ -42,6 +52,10 @@ abstract class AbstractUser extends ObjectModel {
 
     function setPassword($password) {
         $this->password = $password;
+    }
+
+    function setRole($role_id) {
+        $this->role = new Role($role_id);
     }
     
     function setPasswordEncode($password){
@@ -53,15 +67,7 @@ abstract class AbstractUser extends ObjectModel {
     }
     
     function setAuthToken(){
-        $this->token = Authentication::createAuthToken($this->id);
-    }
-    
-    function getRememberToken() {
-        return $this->rememberToken;
-    }
-
-    function setRememberToken() {
-        $this->rememberToken = md5(HASH_ADDITIONAL_VALUE.$this->id.$this->username.rand());
+        $this->token = Authentication::getInstance()->createAuthToken($this->id);
     }
         
     /* ---------- public method ---------- */
@@ -80,6 +86,27 @@ abstract class AbstractUser extends ObjectModel {
     
     public function delete($array=false) {
         parent::delete($array);
+    }
+
+    public function hasPermissions($permissions_ids){
+        foreach($permissions_ids as $permission_id){
+            $flag_perm = false;
+            foreach($this->role->getPermissions() as $permission){
+                if($permission->getId() == $permission_id)
+                    $flag_perm = true;
+            }
+            if(!$flag_perm)
+                return false;
+        }
+        return true;
+    }
+
+    public function hasRole($roles_ids){
+        foreach($roles_ids as $role_id){
+           if($this->role->getId() == $role_id)
+            return true;
+        }
+        return false;
     }
     
     public function getUserByUsername($parameters = null){
@@ -119,6 +146,16 @@ abstract class AbstractUser extends ObjectModel {
         }
         
     }
+
+    public function jsonSerialize () {
+        return [
+            "id" => $this->id,
+            "username" => $this->username,
+            "password" => $this->password
+        ];
+    }
+
+    /* ---------- static method ---------- */
     
     public static function checkForAlreadyUsedParam($param){
         $user = new User();
@@ -127,7 +164,7 @@ abstract class AbstractUser extends ObjectModel {
                 $user->$method($email);
             }
             else{
-                throw new Exception("Setter ".$method." does not exist for class ".get_class($this));
+                throw new Exception("Setter ".$method." does not exist for class ".get_called_class());
             }
 
         $user->read([
@@ -141,82 +178,6 @@ abstract class AbstractUser extends ObjectModel {
             return false;
         
     }
-    
-    public static function checkForAlreadyUsedMail($email){
-        $user = new User();
-        $user->setUsername($email);
-        $user->getUserByUsername();
-        
-        if($user->getId())
-            return true;
-        else
-            return false;
-    }
-    
-    public function createRememberCookie(){
-        if($this->rememberMe())
-            setcookie(REMEMBER_COOKIE_NAME, $this->id."|".$this->token, time()+31556926);
-    }
-    
-    public function  checkRememberMeSession(){
-        
-        $token = User::getTokenFromCookie();
-        $id = User::getUserIdFromCookie();
-        
-        if(!$token || !$id){
-            return false;
-        }
-        
-        $bdd = Bdd::getBdd();
-        $bddToken = $bdd->get('User_rmbrme_info', 'token',
-            [
-                'user_id' => $this->id 
-            ]
-        );
-        
-        if(isset($token) && $id == $this->id && $bddToken == $token)
-            return true;
-        else
-            return false;
-    }
-    
-    /* ---------- protected method ---------- */
-    
-    protected function rememberMe(){
-        
-        $this->setRememberToken();
-        
-        $bdd = Bdd::getBdd();
-        $params_a = $bdd->delete('User_rmbrme_info',
-            [
-                'AND' => [
-                    'user_id' => $this->id 
-                ]
-            ]
-        );
-        
-        $params_b = $bdd->insert('User_rmbrme_info',
-            [
-                'user_id' => $this->id,
-                'token' => $this->token
-            ]
-        );
-        
-        if($params_a){
-            if($params_b)
-                return true;
-            else{
-                trigger_error("Error adding user token to database");
-                return false;
-            }
-        }
-        else{
-            trigger_error("Error deleting user token in database");
-            return false;
-        }
-    }
-    
-    /* ---------- static method ---------- */
  
     public static function getCurrentUser() {
         return self::$currentUser;
@@ -228,7 +189,7 @@ abstract class AbstractUser extends ObjectModel {
     }
     
     public static function getAllUser($params = null){    
-        return ObjectModel::getAllObjectFromClass(get_class($this));  
+        return ObjectModel::getAllObjectFromClass(get_called_class());  
     }
     
     public static function logIn($username, $password){
@@ -237,7 +198,6 @@ abstract class AbstractUser extends ObjectModel {
         if($User->getUserByUsername()){
             if($User->checkAuth($password)){
                 $User->setAuthToken();
-                $User->createRememberCookie();
                 return $User;
             }
             else{
@@ -247,70 +207,6 @@ abstract class AbstractUser extends ObjectModel {
         else{
             return false;
         }
-    }
-    
-    public static function getTokenFromCookie(){
-        
-        if($cookie = User::getRememberCookie()){
-            $cookieVal = explode("|", $cookie);
-            return $cookieVal[1];
-        }
-        else{
-            return false;
-        }
-        
-    }
-    
-    public static function getUserIdFromCookie(){
-        
-        if($cookie = User::getRememberCookie()){
-            $cookieVal = explode("|", $cookie);
-            return $cookieVal[0];
-        }
-        else{
-            return false;
-        }
-        
-    }
-    
-    protected static function getRememberCookie(){
-        
-        if(!isset($_COOKIE[REMEMBER_COOKIE_NAME])){
-            return false;
-        }
-        
-        return $_COOKIE[REMEMBER_COOKIE_NAME];
-        
-    }
-    
-    public static function getOldSession(){
-        
-        if($userId = User::getUserIdFromCookie()){
-            $user = new User($userId);
-
-            if($user->checkRememberMeSession()){
-                return $user;
-            }
-            else{
-                return false;
-            }
-        }
-        else{
-            return false;
-        }
-    }
-    
-    public static function destroyOldSession(){
-
-        if (isset($_COOKIE[REMEMBER_COOKIE_NAME])) {
-            unset($_COOKIE[REMEMBER_COOKIE_NAME]);
-            setcookie(REMEMBER_COOKIE_NAME, '', time() - 3600);
-            return true;
-        } 
-        else {
-            return false;
-        }
-  
     }
     
 }

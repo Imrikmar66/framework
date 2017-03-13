@@ -57,7 +57,7 @@
 	        $skel_controller = $this->getControllerSkeleton($responseControllerName);
 	        fwrite($handle_controller, $skel_controller);
 	       
-	        $output->writeln("\n— $response folder has been created in Modules/ \n");
+	        $output->writeln("\n $response folder has been created in Modules/ \n");
 
 	       	
 	       	/**
@@ -66,7 +66,7 @@
 
 	       	$skel_route = "<?php \n\n";
 
-	        $output->writeln('— Now we will register your module routes and contoller methods');
+	        $output->writeln('Now we will register your module routes and contoller methods');
 			$responseRoutePath = $this->askQuestion('Route path: (or q to quit/save):', '', $input, $output);
 
 	        // Quitte si q
@@ -115,7 +115,7 @@
 
 				fwrite($handle_controller, $skel_method);
 
-				$responseRoutePath = $this->askQuestion('\n Route path: (or q to quit/save): ', '', $input, $output);
+				$responseRoutePath = $this->askQuestion('Route path: (or q to quit/save): ', '', $input, $output);
 	       	}
 			fwrite($handle_route, $skel_route);
 
@@ -130,11 +130,6 @@
 	        $skel_controller = '<?php
 class ' . $name . 'Controller extends Controller {';
 	        $skel_controller .= <<<'EOS'
-	            
-
-	protected function authenticationRequirement() {
-	    return false;
-	}
 
 	protected function defineMainView() {
 	    $this->mainView = "default";
@@ -142,10 +137,6 @@ class ' . $name . 'Controller extends Controller {';
 
 	protected function errorLoadingController() {
 	    $this->mainView = "404";
-	}
-
-	public function abs() {
-	    parent::main();
 	}
 
 EOS;

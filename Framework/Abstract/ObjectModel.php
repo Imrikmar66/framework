@@ -3,11 +3,13 @@
 abstract class ObjectModel {
     
     protected $id;
+    private $finded;
     
     function __construct($id = 0) {
+        $this->finded = false;
         if($id != 0){
             $this->id = $id;
-            $this->read();
+            $this->read(); 
         } 
     }
     
@@ -17,6 +19,10 @@ abstract class ObjectModel {
 
     function setId($id) {
         $this->id = $id;
+    }
+
+    function exist(){
+        return $this->finded;
     }
          
     abstract protected function getBddDescription();
@@ -78,7 +84,7 @@ abstract class ObjectModel {
     }
     
     //Argument can be set as array of data
-    protected function create($array = false){
+    public function create($array = false){
         
         if($array == false){
             $datas = $this->getDataArray();
@@ -97,7 +103,7 @@ abstract class ObjectModel {
          
     }
     
-    protected function read($array = false){
+    public function read($array = false){
         
         if($array == false){
             $datas  = "*";
@@ -117,15 +123,17 @@ abstract class ObjectModel {
             $condition
         );
 
-        if ($readed)
+        if ($readed){
+            $this->finded = true;
             $this->hydrate($readed);
+        }
         else
             return false;
 
     }
     
     //Argument can be set as array('data' => arrayOfDataToUpgrade, 'condition' => arrayOfCondition)
-    protected function update($array=false){
+    public function update($array=false){
         
         if($array == false){
             $datas  = $this->getDataArray();
@@ -148,7 +156,7 @@ abstract class ObjectModel {
     }
     
     //Argument can be set as array(arrayOfCondition)
-    protected function delete($array=false){
+    public function delete($array=false){
         
         if($array == false){
             $condition = [
@@ -182,10 +190,10 @@ abstract class ObjectModel {
             }
                 
         }
-        
+
     }
     
-    public static function getAllObjectFromClass($className, $condition=false){
+    public static function getAllObjectFromClass($className, $use_constructor=false, $condition=false){
         
         if($condition === false){
             $condition = array();
@@ -198,8 +206,13 @@ abstract class ObjectModel {
         $results = $bdd->select($table, "*", $condition);
         
         foreach($results as $result){
-            $Object = new $className();
-            $Object->hydrate($result);
+            if($use_constructor){
+                $Object = new $className($result['id']);
+            }
+            else{
+                $Object = new $className();
+                $Object->hydrate($result);
+            }
             array_push($Objects, $Object);
         }
         return $Objects;

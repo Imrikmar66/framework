@@ -11,6 +11,9 @@ abstract class Controller {
     protected $responseCode;
     protected $responseContentType;
     protected $main;
+    protected $Authentication;
+    protected $permissions;
+    protected $roles;
     
     function __construct() {
         $this->GET_params = $_GET;
@@ -18,6 +21,7 @@ abstract class Controller {
         $this->responseType = $_SERVER['REQUEST_METHOD'];
         $this->responseCode = $this->initResponseCode();
         $this->responseContentType = $this->initResponseContentType();
+        $this->setAuthentication();
 
         $this->initModule();
         
@@ -26,7 +30,11 @@ abstract class Controller {
     }
     
     /* ---- Protected ---- */
-    protected function getView($viewName){
+    protected function setAuthentication(){
+        $this->Authentication = Authentication::getInstance();
+    }
+
+    private function getView($viewName){
         //Get view from module caller
         $reflector = new ReflectionClass(get_class($this));
         $path = dirname(dirname($reflector->getFileName()));
@@ -95,6 +103,16 @@ abstract class Controller {
                 $this->$name = $parsed[$key];
             }
         }
+        return $this;
+    }
+
+    public function setPermissions($permissions){
+        $this->permissions = $permissions;
+        return $this;
+    }
+    public function setRoles($roles){
+        $this->roles = $roles;
+        return $this;
     }
     
     protected function getRouteParam($name){
@@ -116,6 +134,15 @@ abstract class Controller {
         if(!headers_sent()){
             http_response_code($this->responseCode);
             header("Content-Type: ".$this->responseContentType);
+        }
+    }
+
+    protected function authenticationRequirement(){
+        if($this->Authentication->isAuthentified()){
+            return $this->Authentication->hasPermissions($this->permissions) && $this->Authentication->hasRole($this->roles);
+        }
+        else {
+            return count($this->permissions) == 0 && count($this->roles) == 0;
         }
     }
     
@@ -146,7 +173,6 @@ abstract class Controller {
     }
     
     abstract protected function defineMainView();
-    abstract protected function authenticationRequirement();
     abstract protected function errorLoadingController();
 
     /* ---- Public ---- */
@@ -155,12 +181,15 @@ abstract class Controller {
         $this->$main();
     }
     public function beforeMain(){
-        if($this->authenticationRequirement()){
-            if(!Authentication::isAuthentified()){
-                $this->errorLoadingController();}
+        if(!$this->authenticationRequirement()){
+            $this->errorLoadingController();
+            $this->main = "error";
         }
         //send headers response
         $this->sendHeaders();
+    }
+    private function error(){
+        $this->main();
     }
     public function main(){
         //send globals uri for internal loadings
@@ -188,14 +217,14 @@ abstract class Controller {
         $this->displayView();
     }
     
-    public function loadView($view){
+    private function loadView($view){
         $smarty = new Smarty();
         $template = $this->getView($view);
         $smarty->assign($this->tpl_vars);
         $this->html = $smarty->fetch($template);  
     }
     
-    public function displayView($view = null){
+    private function displayView($view = null){
         if($view === null)
             $view = $this->mainView;
        

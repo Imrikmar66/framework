@@ -75,7 +75,7 @@ class TestController extends Controller {
     
     //ask if user have to be connected for main usage (true / false)
     protected function authenticationRequirement() {
-        return false;
+        return true;
     }
     
     //define the main view

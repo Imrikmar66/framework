@@ -11,6 +11,8 @@ class Route {
     protected $GET_params;
     protected $POST_params;
     protected $routeParameters = array();
+    protected $permissions = array();
+    protected $roles = array();
     
     function __construct($type, $url, $controller_name, $http_code = 200, $setController = true, $GET = array(), $POST = array()) {
         $this->url = $url;
@@ -43,6 +45,14 @@ class Route {
 
     function getAlias(){
         return $this->alias;
+    }
+
+    function getRoles(){
+        return $this->roles;
+    }
+
+    function getPermissions(){
+        return $this->permissions;
     }
 
     function setUrl($url) {
@@ -104,6 +114,16 @@ class Route {
 
     function alias($alias){
         $this->alias = $alias;
+        return $this;
+    }
+
+    function roles($roles){
+        $this->roles = $roles;
+        return $this;
+    }
+
+    function permissions($permissions){
+        $this->permissions = $permissions;
         return $this;
     }
     
@@ -239,8 +259,10 @@ class Route {
             //Added with controllername variable for loading controller only if needed
             $route->setController();
             //give all routes parameters to controller
-            $route->getController()->setRouteParameters($route->getRouteParameters());
-
+            $route->getController()
+                ->setRouteParameters($route->getRouteParameters())
+                ->setPermissions($route->permissions)
+                ->setRoles($route->roles);
             return $route;
         }
         

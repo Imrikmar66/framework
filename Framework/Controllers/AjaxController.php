@@ -13,12 +13,7 @@ class AjaxController extends Controller {
     }
 
     public function main(){
-        $this->sendHeaders();
         echo json_encode($this->jsonData);
-    }
-    
-    protected function authenticationRequirement() {
-        return true;
     }
     
     protected function sendHeaders(){
@@ -36,6 +31,7 @@ class AjaxController extends Controller {
     protected function errorLoadingController() {
         $this->setResponseCode(404);
         $this->mainView = "404";
+        $this->jsonData = json_encode(['Error' => '404 not allowed']);
     }
 
     protected function initResponseContentType() {

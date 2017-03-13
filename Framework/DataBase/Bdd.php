@@ -19,15 +19,14 @@ class Bdd {
             'password' => BDD_PASS,
             'charset' => BDD_CHARSET,
         ];
-        
+        $this->link = new Medoo($this->medooConstructorArray);
     }
     
     private function getLink() {
-        $this->link = new Medoo($this->medooConstructorArray);
         return $this->link;
     }
     
-    public static function getBdd(){
+    public static function getBdd(){ 
         if(!self::$staticbdd){
             self::$staticbdd = new Bdd();
         }

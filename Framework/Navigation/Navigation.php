@@ -45,7 +45,7 @@ class Navigation {
 
     // Redirige les utilisateurs non admins vers la route d'alias donné
     public static function redirectIfNotAdmin($alias){
-        if(!Authentication::isSuperAdmin()){
+        if(!Authentication::getInstance()->isSuperAdmin()){
             self::navigateTo($alias);
         }
     }
