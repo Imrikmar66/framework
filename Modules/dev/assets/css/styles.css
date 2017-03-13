@@ -1,0 +1,11 @@
+table, tbody, thead, td {
+    border: 1px solid black;
+}
+td {
+    text-align: center;
+    padding: 5px;
+}
+.noborder {
+    border: none;
+    background-color: black;
+}
