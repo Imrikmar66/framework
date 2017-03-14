@@ -8,10 +8,8 @@
         <script src="{$URL_ASSETS}/js/main.js"></script>
     </head>
     <body>
-        <h1> Dev Home </h1>
+        <h1> Dev Roles </h1>
         <section>
-            <h2> Rôles </h2>
-
             <h3> Add rôle </h3>
             <form action="{$Routes->pathOfRoute('dev_roles_add')}" method="post" >
                 <input type="text" name="role_name" placeholder="Name" /><br>
@@ -34,7 +32,7 @@
                         <td> Description </td>
                         <td> Ids </td>
                     {foreach from=$roles item=role}
-                        <td> {$role->getName()} </td>
+                        <td class="no-bold"> {$role->getName()} </td>
                     {/foreach}
                     </thead>
                     <tbody>

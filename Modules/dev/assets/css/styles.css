@@ -1,9 +1,19 @@
 table, tbody, thead, td {
     border: 1px solid black;
 }
+thead {
+    font-weight: bold;
+}
+thead .no-bold{
+    font-weight: normal;
+}
 td {
     text-align: center;
     padding: 5px;
+}
+td ul{
+    text-align: left;
+    list-style: circle;
 }
 .noborder {
     border: none;

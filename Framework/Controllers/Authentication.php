@@ -65,29 +65,18 @@ class Authentication {
             return false;
     }
 
-
-    /*----------  Fonctions customs non présentes de base que c'est moi qui ai codé hihi  ----------*/
-
-    
-    // Plutôt explicite oh
-    // Retourne le token si superAdmin
-    public function isSuperAdmin(){
-        if(isset($_SESSION['role'])){
-            if( $_SESSION['role'] == self::AUTH_SUPERADMIN){
-                return self::getToken();
-            }
-        }
-        return false;
-    }
-
     public function hasRole($roles){
-        return $this->singleUser->hasRole($roles) || count($roles) == 0;
+        if($this->singleUser)
+            return $this->singleUser->hasRole($roles) || count($roles) == 0;
+        else
+             return count($roles) == 0;
     }
 
-    // Retourne true si l'utilisateur connecté a le droit de réaliser les actions dans l'array donné
-    // ex: isAllowedTo([Authentication::CREATE_FORM, Authentication::DELETE_FORM, Authentication::MODIFY_FORM])
     public function hasPermissions($permissions){
-        return $this->singleUser->hasPermissions($permissions) || count($permissions) == 0;
+        if($this->singleUser)
+            return $this->singleUser->hasPermissions($permissions) || count($permissions) == 0;
+        else
+            return count($permissions) == 0;
     }
     
 }

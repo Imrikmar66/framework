@@ -180,10 +180,13 @@ abstract class AbstractUser extends ObjectModel implements JsonSerializable {
     }
  
     public static function getCurrentUser() {
+        if(isset($_SESSION['User']) && $_SESSION['User'])
+            self::$currentUser = $_SESSION['User'];
+
         return self::$currentUser;
     }
 
-    public static function setCurrentUser($currentUser) {
+    public static function setCurrentUser(AbstractUser $currentUser) {
         self::$currentUser = $currentUser;
         $_SESSION['User'] = $currentUser;
     }
@@ -193,7 +196,8 @@ abstract class AbstractUser extends ObjectModel implements JsonSerializable {
     }
     
     public static function logIn($username, $password){
-        $User = new User();
+        $userClass = get_called_class();
+        $User = new $userClass();
         $User->setUsername($username);
         if($User->getUserByUsername()){
             if($User->checkAuth($password)){

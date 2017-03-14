@@ -31,7 +31,7 @@ class Debug {
     }
     
     public function getModViews(){
-        return $this->modControllers;
+        return $this->modViews;
     }
     
     public function getDuplicateModClasses(){

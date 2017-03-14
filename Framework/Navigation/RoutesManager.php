@@ -31,10 +31,13 @@ class RoutesManager {
     }
 
     // Retourne l'url de la route dont l'alias est donné
-    public function pathOfRoute($alias){
+    public function pathOfRoute($alias, $params = []){
         foreach ($this->routes as $route) {
             if($route->getAlias() == $alias){
-                return URL_FOLDER .'/'. $route->getUrl() ;
+                $the_route = URL_FOLDER .'/'. $route->getUrl();
+                return preg_replace_callback ("/(@[a-zA-Z]+)/", function($matches) use (&$params) {
+                    return array_shift($params);
+                }, $the_route);
             } 
         }
     }

@@ -20,6 +20,19 @@ class DevController extends Controller {
         parent::main();
     }
 
+	public function dev_routes() {
+        $this->mainView = 'dev_routes';
+		$this->tplVar('routes', RoutesManager::getRoutesManager()->getRoutes());
+        parent::main();
+    }
+
+	public function dev_modules() {
+        $this->mainView = 'dev_modules';
+		$modules = Module::getAll();
+		$this->tplVar('modules', $modules);
+        parent::main();
+    }
+
 	public function permissions_update(){
 		$roles_ids = [];
 		foreach($this->POST('permissions') as $data){

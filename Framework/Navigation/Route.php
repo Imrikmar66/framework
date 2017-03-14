@@ -35,6 +35,10 @@ class Route {
         return $this->controller;
     }
 
+    function getControllerName(){
+        return $this->controller_name;
+    }
+
     function getHttp_code() {
         return $this->http_code;
     }
