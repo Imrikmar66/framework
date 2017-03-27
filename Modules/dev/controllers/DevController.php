@@ -6,7 +6,8 @@ class DevController extends Controller {
 	}
 
 	protected function errorLoadingController() {
-	    $this->mainView = "404";
+		Navigation::navigateTo('login');
+	    //$this->mainView = "404";
 	}
 
     public function dev_roles() {

@@ -21,9 +21,7 @@ class AuthController extends Controller {
 
 	public function login(){
 		$this->mainView = 'login';
-		RoutesManager::getRoutesManager()->pathOfRoute('actionLogin', ['pierre', 'mar']);
 		parent::main();
-		$fu = (new FakeUser())->connectAs(1);
 	}
 
 	public function actionLogin(){
@@ -32,8 +30,8 @@ class AuthController extends Controller {
 			SimpleUser::setCurrentUser($user);
 			Navigation::navigateTo('dev_roles');
 		}
-		else
-			Navigation::navigateTo('login');
+		else {
+			Navigation::navigateTo('login');}
 	}
 
 }

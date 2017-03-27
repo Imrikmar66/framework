@@ -37,7 +37,7 @@ class Permission extends ObjectModel{
     }
 
     public static function getAllPermissions(){
-        return parent::getAllObjectFromClass(get_called_class());
+        return parent::getAllObjects(get_called_class());
     }
 
 }

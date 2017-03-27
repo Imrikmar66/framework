@@ -1,6 +1,6 @@
 <?php
 
-abstract class ObjectModel {
+abstract class ObjectModel implements JsonSerializable {
     
     protected $id;
     private $finded;
@@ -26,13 +26,50 @@ abstract class ObjectModel {
     }
          
     abstract protected function getBddDescription();
+
+    private function description(){
+
+        $description = $this->getBddDescription();
+        $flag_error = false;
+        $error = "";
+
+        if(!$flag_error && gettype($description) != "array"){
+            $error = "getBddDescription() must return an array [ 'table' : 'mytable', 'parameters' : [ 'property' : 'column_name' ] ]";
+            $flag_error = true;
+        }
+            
+        
+        if(!$flag_error && !isset($description['table'])){
+            $error ="missing table name(string)";
+            $flag_error = true;
+        }
+        else if(!$flag_error && gettype($description['table']) !='string'){
+            $error ="table name must be a string";
+            $flag_error = true;
+        }
+                
+
+        if(!$flag_error && !isset($description['parameters'])){
+            $error = "missing parameters(array)";
+            $flag_error = true;
+        }
+        else if(!$flag_error && gettype($description['parameters']) != "array"){
+            $error ="parameters must be an array of type 'parameters' : [ 'property' : 'column_name' ]";
+            $flag_error = true;
+        }
+
+        if($flag_error)
+            new Errormanager($error, get_called_class(), "getBddDescription()");
+
+        return $description;
+    }
     
     private function getTable(){
-        return $this->getBddDescription()['table'];
+        return $this->description()['table'];
     }
     
     private function getParameters(){
-        return $this->getBddDescription()['parameters'];
+        return $this->description()['parameters'];    
     }
     
     private function getDataArray($array = false){
@@ -192,19 +229,39 @@ abstract class ObjectModel {
         }
 
     }
-    
-    public static function getAllObjectFromClass($className, $use_constructor=false, $condition=false){
-        
-        if($condition === false){
-            $condition = array();
-        }
-        $Objects = array();
+
+    public function jsonSerialize(){
+
+        $jsonArray = [];
+
+         $parameters = $this->getParameters();
+         foreach($parameters as $key => $element){
+            $method = 'get'.ucfirst($key);
+            if(method_exists($this, $method)){
+                $jsonArray[$key] = $this->$method();
+            }
+         }
+
+         return $jsonArray;
+    }
+
+    public static function getAllObjects($use_constructor=false, $condition=[]){
+       
+        $className = get_called_class();
         
         $table = (new $className())->getTable();
         
         $bdd = Bdd::getBdd();
         $results = $bdd->select($table, "*", $condition);
         
+        return self::ObjectsFromRequest($results);
+    }
+
+    public static function ObjectsFromRequest($results, $use_constructor = false){
+        
+        $Objects = array();
+        $className = get_called_class();
+
         foreach($results as $result){
             if($use_constructor){
                 $Object = new $className($result['id']);
@@ -216,6 +273,7 @@ abstract class ObjectModel {
             array_push($Objects, $Object);
         }
         return $Objects;
+
     }
     
     

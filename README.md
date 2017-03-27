@@ -109,6 +109,24 @@ $isGet = $this->isGET(); //return if request is get
 $isPost = $this->isPOST(); //return if request is post
 ```
 
+You can create ajax or api controllers, serving application/json data with the parent Controller `AjaxController` :
+```php
+class ApiController extends AjaxController {
+
+	protected function errorLoadingController() {
+	    $this->mainView = "404";
+	}
+
+    public function api_users() {
+        $this->jsonData = User::getAll();
+        parent::main();
+    }
+}
+```
+
+Defining the mainView is useless for AjaxControllers. In action functions, use `$this->jsonData` for setup data you want to display. Don't forget to call parent `main` function wich display those data.
+
+
 ### Classes
 
 Classes are set in `Modules/MYMODULE/class`. They have the same php file name as the class name and they can extends `Objectmodel` : 
@@ -156,6 +174,11 @@ $user->read();
 $user->update();
 $user->delete();
 ```
+
+ObjectModel is a database-based object : 
+ - You need to implement `getBddDescription` for link variable to database column name `"property" => "column name")`, create setter for property you want to auto hydrate, so the automatic read will work if you pass an id to Object constructor. Don't precise id if you don't want to auto hydrate. Don't forget to precise table name.
+ - You need to implements getter if you are working on api and auto generate json for Api controllers.
+ - You can get all Object From class with static method : `self::getAllObjects(Boolean useConstructor, Array condition)`
 
 ### Database
 Database is based on [Meedo](http://medoo.in/doc) Library. You can call Bdd anywhere in object or controllers like this :

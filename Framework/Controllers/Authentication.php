@@ -54,8 +54,10 @@ class Authentication {
         return true;
     }
     
-    public function createAuthToken($id){
-        return hash('sha256', HASH_ADDITIONAL_VALUE."http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"].$_SERVER['HTTP_USER_AGENT']).time()."-".$id;
+    public function createAuthToken($id){ 
+        $token = hash('sha256', HASH_ADDITIONAL_VALUE."http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"].$_SERVER['HTTP_USER_AGENT']).time()."-".$id;
+        $this->validAuth( $token);
+        return $token;
     }
     
     public function get($param){

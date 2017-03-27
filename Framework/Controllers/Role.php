@@ -85,7 +85,7 @@ class Role extends ObjectModel{
     }
 
     public static function getAllRoles(){
-        return parent::getAllObjectFromClass(get_called_class(), true);
+        return parent::getAllObjects(true);
     }
 
 }
