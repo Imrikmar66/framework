@@ -254,7 +254,7 @@ abstract class ObjectModel implements JsonSerializable {
         $bdd = Bdd::getBdd();
         $results = $bdd->select($table, "*", $condition);
         
-        return self::ObjectsFromRequest($results);
+        return self::ObjectsFromRequest($results, $use_constructor);
     }
 
     public static function ObjectsFromRequest($results, $use_constructor = false){

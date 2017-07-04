@@ -84,6 +84,7 @@ INSERT INTO `roles_rights` (`id`, `id_role`, `id_right`) VALUES
 CREATE TABLE IF NOT EXISTS `users` (
 `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role_id` int(11) DEFAULT '-1'
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
@@ -92,9 +93,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Contenu de la table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `role_id`) VALUES
-(13, 'p.mar@lidem.eu', '5badcaf789d3d1d09794d8f021f40f0e', 1),
-(14, 'manu@sfr.com', 'f13bb1bed03db9d68a7d9a48aafeec78', 1);
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `role_id`) VALUES
+(13, 'p.mar@lidem.eu', 'pierre', '5badcaf789d3d1d09794d8f021f40f0e', 1),
+(14, 'manu@sfr.com', 'manu','f13bb1bed03db9d68a7d9a48aafeec78', 1);
 
 --
 -- Index pour les tables exportées
