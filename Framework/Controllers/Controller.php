@@ -145,6 +145,32 @@ abstract class Controller {
             return count($this->permissions) == 0 && count($this->roles) == 0;
         }
     }
+
+    public function getMissingPermissions() {
+        $missing = array();
+        if($this->Authentication->isAuthentified()){
+            foreach($this->permissions as $permission){
+                if(!$this->Authentication->hasPermissions([$permission]))
+                    array_push($missing, $permission);
+            }
+            return $missing;
+        }
+        else
+            return false;
+    }
+
+    public function getMissingRoles() {
+        $missing = array();
+        if($this->Authentication->isAuthentified()){
+            foreach($this->roles as $role){
+                if(!$this->Authentication->hasRole([$role]))
+                    array_push($missing, $role);
+            }
+            return $missing;
+        }
+        else
+            return false;
+    }
     
     //Autoload classes of controller module - rewrite for custom classes loading
     protected function initModule(){

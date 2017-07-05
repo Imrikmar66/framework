@@ -1,4 +1,4 @@
-<?php 
+<?php
 R::addRoute('GET', 'dev', 'Dev::dev_home')
     ->alias('dev_home')
     ->roles([1]);
