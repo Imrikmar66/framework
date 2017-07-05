@@ -12,8 +12,6 @@
 		- Pouvoir ecraser des précédents parametres
 	
 	 */
-	
-
 
 	class InstallCommand extends Command
 	{
@@ -62,7 +60,37 @@
 	    		}
 	    	}
 
-	    	fwrite($handle_config, implode('', $arrConfig));		
+	    	fwrite($handle_config, implode('', $arrConfig));
+
+			$sqlfile = dirname(dirname(dirname(dirname(__FILE__))))."/Install/users_roles_and_rights_tables.sql";
+			$sql_request = file_get_contents ($sqlfile);
+			
+			$sql_statements = explode(";", $sql_request);
+			array_pop($sql_statements);		
+
+			$link = mysqli_connect(
+				$responseHost, 
+				$responseUsername, 
+				$responsePassword, 
+				$responseDatabaseName
+			);
+
+			if (mysqli_connect_error()) {
+				echo "Echec lors de la connexion à MySQL";
+			}
+			else {
+
+				foreach($sql_statements as $key => $sql_statement){
+
+					if(!mysqli_query($link, $sql_statement)){
+						echo("Error description: " . mysqli_error($link));
+						echo $sql_statement;
+					}
+					else
+						echo "step-".$key."\n";
+				}
+				echo "Installation terminée";
+			}	
 	    }
 
 	    protected function paramDatabase($host, $database, $user, $password, $type, $charset)

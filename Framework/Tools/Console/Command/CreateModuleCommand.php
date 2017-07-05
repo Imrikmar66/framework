@@ -12,7 +12,6 @@
 
 	TODO:
 	- Ajouter la création de vue si GET
-	- Second todo item
 
  */
 

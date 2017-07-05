@@ -1,4 +1,24 @@
-SET SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO';
+-- phpMyAdmin SQL Dump
+-- version 4.2.7
+-- http://www.phpmyadmin.net
+--
+-- Client :  localhost:3306
+-- Généré le :  Ven 10 Mars 2017 à 17:13
+-- Version du serveur :  5.5.41-log
+-- Version de PHP :  5.6.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+-- SET time_zone = "+00:00";
+
+--
+-- Base de données :  `ionic`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rights`
+--
 
 CREATE TABLE IF NOT EXISTS `rights` (
 `id` int(11) NOT NULL,
@@ -6,10 +26,20 @@ CREATE TABLE IF NOT EXISTS `rights` (
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
+--
+-- Contenu de la table `rights`
+--
+
 INSERT INTO `rights` (`id`, `action`, `description`) VALUES
 (6, 'CREATE POST', 'Can create post'),
 (7, 'DELETE POST', 'Can delete post'),
 (8, 'UPDATE POST', 'Can update post');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `roles`
+--
 
 CREATE TABLE IF NOT EXISTS `roles` (
 `id` int(11) NOT NULL,
@@ -17,8 +47,18 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
+--
+-- Contenu de la table `roles`
+--
+
 INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 (1, 'administrateur', 'High right level');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `roles_rights`
+--
 
 CREATE TABLE IF NOT EXISTS `roles_rights` (
 `id` int(11) NOT NULL,
@@ -26,10 +66,20 @@ CREATE TABLE IF NOT EXISTS `roles_rights` (
   `id_right` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Table de liens entre les roles et leurs droits' AUTO_INCREMENT=15 ;
 
+--
+-- Contenu de la table `roles_rights`
+--
+
 INSERT INTO `roles_rights` (`id`, `id_role`, `id_right`) VALUES
 (12, 1, 6),
 (13, 1, 7),
 (14, 1, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
 
 CREATE TABLE IF NOT EXISTS `users` (
 `id` int(11) NOT NULL,
@@ -39,37 +89,79 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role_id` int(11) DEFAULT '-1'
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
+--
+-- Contenu de la table `users`
+--
+
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `role_id`) VALUES
 (13, 'p.mar@lidem.eu', 'pierre', '5badcaf789d3d1d09794d8f021f40f0e', 1),
 (14, 'manu@sfr.com', 'manu','f13bb1bed03db9d68a7d9a48aafeec78', 1);
 
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `rights`
+--
 ALTER TABLE `rights`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `action_2` (`action`), ADD KEY `action` (`action`);
 
+--
+-- Index pour la table `roles`
+--
 ALTER TABLE `roles`
  ADD PRIMARY KEY (`id`);
 
+--
+-- Index pour la table `roles_rights`
+--
 ALTER TABLE `roles_rights`
  ADD PRIMARY KEY (`id`), ADD KEY `id_role` (`id_role`), ADD KEY `name_right` (`id_right`);
 
+--
+-- Index pour la table `users`
+--
 ALTER TABLE `users`
  ADD PRIMARY KEY (`id`), ADD KEY `role_id` (`role_id`);
 
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `rights`
+--
 ALTER TABLE `rights`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
-
+--
+-- AUTO_INCREMENT pour la table `roles`
+--
 ALTER TABLE `roles`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
-
+--
+-- AUTO_INCREMENT pour la table `roles_rights`
+--
 ALTER TABLE `roles_rights`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
-
+--
+-- AUTO_INCREMENT pour la table `users`
+--
 ALTER TABLE `users`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- Contraintes pour les tables exportées
+--
 
+--
+-- Contraintes pour la table `roles_rights`
+--
 ALTER TABLE `roles_rights`
 ADD CONSTRAINT `link_right` FOREIGN KEY (`id_right`) REFERENCES `rights` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `link_role` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+--
+-- Contraintes pour la table `users`
+--
 ALTER TABLE `users`
 ADD CONSTRAINT `user_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
