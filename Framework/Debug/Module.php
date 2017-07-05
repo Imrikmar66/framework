@@ -49,12 +49,24 @@ class Module {
         $this->controllers = $controller_list;
     }
 
-    private function get_ModViews(){
+    private function get_ModViews($depth = ''){
         $template_list = array();
-        $template_files = array_diff(scandir(URI_MOD.'/'.$this->name.'/view'), array('.', '..'));
+        $base_dir = URI_MOD.'/'.$this->name.'/view';
+        $template_files = array_diff(scandir($base_dir . $depth), array('.', '..'));
+        
         foreach($template_files as $template){
-            array_push($template_list, $template);
+            $dir = !$depth ? $base_dir . '/'. $template : $base_dir . $depth . '/' . $template; 
+            if( is_dir($dir) ){
+                $template_list = array_merge($template_list, $this->get_ModViews($depth. '/' . $template));
+            }
+            else{
+                $template = !$depth ? $template : ltrim($depth. '/' . $template, '/');
+                array_push($template_list, $template);
+            }
         }
+
+        if($depth)
+            return $template_list;
 
         $this->views = $template_list;
     }

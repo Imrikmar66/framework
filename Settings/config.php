@@ -20,7 +20,7 @@ define('HASH_ADDITIONAL_VALUE', '3a8rty74hj');
 /* URI */
 define('URL_SERVOR', "http://$_SERVER[HTTP_HOST]");
 //define('URL_FOLDER', URL_SERVOR.'/distant-framework');
-define('URL_FOLDER', URL_SERVOR.'/warhammer_webserv');
+define('URL_FOLDER', URL_SERVOR.'/distant-framework');
 define('URL_RESSOURCES', URL_FOLDER."/Ressources");
 define('URL_FRAMEWORK', URL_FOLDER."/Framework");
 define('URL_MOD', URL_FOLDER.'/Modules');

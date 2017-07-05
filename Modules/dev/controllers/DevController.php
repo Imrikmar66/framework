@@ -10,6 +10,11 @@ class DevController extends Controller {
 	    //$this->mainView = "404";
 	}
 
+	public function dev_home() {
+        $this->mainView = 'dev_home';
+        parent::main();
+    }
+
     public function dev_roles() {
         $this->mainView = 'dev_roles';
 		$roles = Role::getAllRoles();

@@ -9,6 +9,7 @@
     </head>
     <body>
         <h1> Dev Roles </h1>
+        {include file="./_partials/menu.tpl" title="menu"}
         <section>
             <h3> Add rôle </h3>
             <form action="{$Routes->pathOfRoute('dev_roles_add')}" method="post" >

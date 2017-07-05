@@ -9,6 +9,7 @@
     </head>
     <body>
         <h1> Dev Modules </h1>
+        {include file="./_partials/menu.tpl" title="menu"}
             <h2>List</h2>
             <table>
                 <thead>

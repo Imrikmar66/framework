@@ -9,6 +9,7 @@
     </head>
     <body>
         <h1> Dev Routes </h1>
+        {include file="./_partials/menu.tpl" title="menu"}
             <table id="routes">
                 <thead>
                     <td>Alias</td>
