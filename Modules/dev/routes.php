@@ -1,9 +1,4 @@
 <?php
-R::addRoute('GET', 'dev/sub', 'Dev::dev_home')
-    ->alias('dev_home')
-    ->roles([1, 2])
-    ->permissions([9]);
-
 R::addRoute('GET', 'dev', 'Dev::dev_home')
     ->alias('dev_home')
     ->roles([1]);
