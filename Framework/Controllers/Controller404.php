@@ -7,6 +7,7 @@ class Controller404  extends Controller{
     }
 
     protected function defineMainView() {
+        $this->responseCode = 404;
         $this->mainView = '404';
     }
 

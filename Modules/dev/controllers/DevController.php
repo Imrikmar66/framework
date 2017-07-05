@@ -6,7 +6,32 @@ class DevController extends Controller {
 	}
 
 	protected function errorLoadingController() {
-		Navigation::navigateTo('login');
+		if($this->Authentication->isAuthentified()){
+
+			$perms = array();
+			$permsId = $this->getMissingPermissions();
+			foreach ($permsId as $permId) {
+				array_push($perms, new Permission($permId));
+			}
+
+			$roles = array();
+			$rolesId = $this->getMissingRoles();
+			foreach ($rolesId as $roleId) {
+				array_push($roles, new Role($roleId));
+			}
+			
+
+			$this->arrTplVar([
+				'perms'=> $perms,
+				'roles' => $roles
+			]);
+			
+			$this->responseCode = 403;
+			$this->mainView = "403";
+		}
+		else {
+			Navigation::navigateTo('login');
+		}
 	    //$this->mainView = "404";
 	}
 
