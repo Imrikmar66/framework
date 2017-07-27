@@ -1,5 +1,4 @@
 <?php
-
 class Debug {
     
     private $classes;
