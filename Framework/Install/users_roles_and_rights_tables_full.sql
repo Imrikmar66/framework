@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS `rights` (
 --
 
 INSERT INTO `rights` (`id`, `action`, `description`) VALUES
-(6, 'CREATE POST', 'Can create post'),
-(7, 'DELETE POST', 'Can delete post'),
-(8, 'UPDATE POST', 'Can update post');
+(1, 'CREATE POST', 'Can create post'),
+(2, 'DELETE POST', 'Can delete post'),
+(3, 'UPDATE POST', 'Can update post');
 
 -- --------------------------------------------------------
 
@@ -71,9 +71,9 @@ CREATE TABLE IF NOT EXISTS `roles_rights` (
 --
 
 INSERT INTO `roles_rights` (`id`, `id_role`, `id_right`) VALUES
-(12, 1, 6),
-(13, 1, 7),
-(14, 1, 8);
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -94,8 +94,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `role_id`) VALUES
-(13, 'p.mar@lidem.eu', 'pierre', '5badcaf789d3d1d09794d8f021f40f0e', 1),
-(14, 'manu@sfr.com', 'manu','f13bb1bed03db9d68a7d9a48aafeec78', 1);
+(1, 'admin@admin.com', 'admin','21232f297a57a5a743894a0e4a801fc3', 1);
 
 --
 -- Index pour les tables exportées

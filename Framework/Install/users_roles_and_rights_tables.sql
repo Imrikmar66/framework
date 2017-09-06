@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS `rights` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 INSERT INTO `rights` (`id`, `action`, `description`) VALUES
-(6, 'CREATE POST', 'Can create post'),
-(7, 'DELETE POST', 'Can delete post'),
-(8, 'UPDATE POST', 'Can update post');
+(1, 'CREATE POST', 'Can create post'),
+(2, 'DELETE POST', 'Can delete post'),
+(3, 'UPDATE POST', 'Can update post');
 
 CREATE TABLE IF NOT EXISTS `roles` (
 `id` int(11) NOT NULL,
@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS `roles_rights` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Table de liens entre les roles et leurs droits' AUTO_INCREMENT=15 ;
 
 INSERT INTO `roles_rights` (`id`, `id_role`, `id_right`) VALUES
-(12, 1, 6),
-(13, 1, 7),
-(14, 1, 8);
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3);
 
 CREATE TABLE IF NOT EXISTS `users` (
 `id` int(11) NOT NULL,
@@ -40,8 +40,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `role_id`) VALUES
-(13, 'p.mar@lidem.eu', 'pierre', '5badcaf789d3d1d09794d8f021f40f0e', 1),
-(14, 'manu@sfr.com', 'manu','f13bb1bed03db9d68a7d9a48aafeec78', 1);
+(1, 'admin@admin.com', 'admin','21232f297a57a5a743894a0e4a801fc3', 1);
 
 ALTER TABLE `rights`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `action_2` (`action`), ADD KEY `action` (`action`);
