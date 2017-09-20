@@ -18,6 +18,7 @@ abstract class Controller {
     function __construct() {
         $this->GET_params = $_GET;
         $this->POST_params = $_POST;
+        $this->JSONPOST_params = file_get_contents('php://input');
         $this->responseType = $_SERVER['REQUEST_METHOD'];
         $this->responseCode = $this->initResponseCode();
         $this->responseContentType = $this->initResponseContentType();
