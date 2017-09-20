@@ -235,7 +235,8 @@ abstract class Controller {
                 'URL_RESSOURCES' => URL_RESSOURCES,
                 'URL_FOLDER' => URL_FOLDER,
                 'Routes' => RoutesManager::getRoutesManager(),
-                'URL_ASSETS' => $assets
+                'URL_ASSETS' => $assets,
+                'URI_TEMPLATE' => URI_TEMPLATE
             )
         );
         

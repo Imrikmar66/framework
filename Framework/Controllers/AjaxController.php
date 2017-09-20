@@ -3,6 +3,7 @@
 class AjaxController extends Controller {
     
     protected $jsonData;
+    private $enabledJsonP = false;
     
     function getJsonData() {
         return $this->jsonData;
@@ -12,8 +13,19 @@ class AjaxController extends Controller {
         $this->jsonData = $jsonData;
     }
 
+    function enableJsonP(){
+        $this->enabledJsonP = true;
+    }
+
     public function main(){
-        echo json_encode($this->jsonData);
+
+        $jsonEncoded = json_encode($this->jsonData);
+
+        if( $this->enabledJsonP && ($cb = $this->POST("callback")) ){
+            echo $cb . "(" .  $jsonEncoded . ")";
+        }
+        else
+            echo $jsonEncoded;
     }
     
     protected function sendHeaders(){
