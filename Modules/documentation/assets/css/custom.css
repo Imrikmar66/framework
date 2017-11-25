@@ -1,0 +1,13 @@
+.doc_block {
+    padding: 40px 0px;
+    border-top: 1px solid grey;
+}
+b.folder{
+    color:green;
+}
+b.file{
+    color:blue;
+}
+b.var, i.var{
+    color:rgb(212, 0, 255);
+}

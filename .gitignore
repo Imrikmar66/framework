@@ -1,2 +1,6 @@
 templates_c/
 templates_c
+
+Settings/config.php
+Settings/Routes.php
+Settings/smarty-master/
